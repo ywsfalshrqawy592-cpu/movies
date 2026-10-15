@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:movies_app/Ui/screens/home/home_screen.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'l10n/app_localizations.dart';
 
 
@@ -18,6 +20,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      initialRoute: AppRoutes.homeRouteName,
+      routes: {
+        AppRoutes.homeRouteName: (context) => HomeScreen(),
+      }
       //locale: Locale(),   //todo: we will use the language bloc here
     );
   }

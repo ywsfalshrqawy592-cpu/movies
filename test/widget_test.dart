@@ -3,6 +3,8 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:movies_app/main.dart';
 
+import '../lib/main.dart';
+
 void main() {
   testWidgets('App renders correctly', (WidgetTester tester) async {
     SharedPreferences.setMockInitialValues({});
