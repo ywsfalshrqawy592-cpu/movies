@@ -38,6 +38,8 @@ dependencies:
   flutter_localization: ^0.4.1
   google_fonts: ^9.0.0
   flutter_native_splash: ^2.4.8
+  flutter_bloc: ^9.1.1
+  shared_preferences: ^2.5.6
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +64,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-assets:
+  assets:
     - assets/images/
   #   - images/a_dot_ham.jpeg
 
