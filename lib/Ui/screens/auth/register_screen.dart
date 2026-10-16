@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
+import '../../../utils/size_utils.dart';
 import '../../widgets/auth_footer_text.dart';
 import '../../widgets/custom_elevated_botton.dart';
 import '../../widgets/language_switch.dart';
@@ -12,6 +13,9 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = context.height;
+    final width = context.width;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
@@ -19,75 +23,90 @@ class RegisterScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.primaryColor),
+          icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Register',
           style: TextStyle(color: AppColors.primaryColor, fontSize: 16),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.037),
         child: Column(
           children: [
-            const SizedBox(height: 9),
+            SizedBox(height: height * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(AppAssets.avatar_3, width: 94, height: 94),
-                Image.asset(AppAssets.avatar_1, width: 158, height: 161),
-                Image.asset(AppAssets.avatar_2, width: 94, height: 94),
+                Image.asset(
+                  AppAssets.avatar_3,
+                  width: width * 0.22,
+                  height: width * 0.22,
+                ),
+                Image.asset(
+                  AppAssets.avatar_1,
+                  width: width * 0.37,
+                  height: width * 0.37,
+                ),
+                Image.asset(
+                  AppAssets.avatar_2,
+                  width: width * 0.22,
+                  height: width * 0.22,
+                ),
               ],
             ),
-            const SizedBox(height: 10),
-            const Text(
+            SizedBox(height: height * 0.01),
+            Text(
               'Avatar',
               style: TextStyle(color: AppColors.whiteColor, fontSize: 16),
             ),
-            const SizedBox(height: 12),
-            const AuthField(hint: 'Name', icon: Icons.badge_outlined),
-            const SizedBox(height: 24),
-            const AuthField(
+            SizedBox(height: height * 0.013),
+            AuthField(hint: 'Name', icon: Icons.badge_outlined),
+            SizedBox(height: height * 0.026),
+            AuthField(
               hint: 'Email',
               icon: Icons.email,
               keyboardType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 24),
-            const AuthField(hint: 'Password', icon: Icons.lock, isPassword: true),
-            const SizedBox(height: 24),
-            const AuthField(
+            SizedBox(height: height * 0.026),
+            AuthField(hint: 'Password', icon: Icons.lock, isPassword: true),
+            SizedBox(height: height * 0.026),
+            AuthField(
               hint: 'Confirm Password',
               icon: Icons.lock,
               isPassword: true,
             ),
-            const SizedBox(height: 24),
-            const AuthField(
+            SizedBox(height: height * 0.026),
+            AuthField(
               hint: 'Phone Number',
               icon: Icons.phone,
               keyboardType: TextInputType.phone,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: height * 0.026),
             SizedBox(
               width: double.infinity,
-              height: 56,
+              height: height * 0.06,
               child: CustomElevatedBotton(
                 onPressed: () {},
-                child: const Text(
+                child: Text(
                   'Create Account',
-                  style: TextStyle(color: AppColors.backgroundColor, fontSize: 20),
+                  style: TextStyle(
+                    color: AppColors.backgroundColor,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 18),
+            SizedBox(height: height * 0.019),
             AuthFooterText(
               question: 'Already Have Account ?',
               action: 'Login',
               onTap: () => Navigator.pop(context),
             ),
-            const SizedBox(height: 18),
-            const LanguageSwitch(),
-            const SizedBox(height: 32),
+            SizedBox(height: height * 0.019),
+            LanguageSwitch(),
+            SizedBox(height: height * 0.034),
           ],
         ),
       ),
