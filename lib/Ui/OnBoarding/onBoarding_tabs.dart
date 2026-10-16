@@ -43,7 +43,7 @@ class OnboardingTabs extends StatelessWidget {
     if (cubit.isLast) {
       await cubit.finish();
       if (!context.mounted) return;
-      Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+      Navigator.pushReplacementNamed(context, AppRoutes.loginRouteName);
     } else {
       cubit.next();
     }

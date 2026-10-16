@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movies_app/Ui/OnBoarding/onboarding_cubit.dart';
 import 'package:movies_app/Ui/screens/home/home_screen.dart';
+import 'package:movies_app/Ui/screens/auth/login_screen.dart';
+import 'package:movies_app/Ui/screens/auth/register_screen.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'Ui/OnBoarding/onBoarding_tabs.dart';
@@ -25,10 +27,12 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: AppPrefs.onboardingSeen
-          ? AppRoutes.homeRouteName
+          ? AppRoutes.loginRouteName
           : AppRoutes.onBoardingRouteName,
       routes: {
         AppRoutes.homeRouteName: (context) => const HomeScreen(),
+        AppRoutes.loginRouteName: (context) => const LoginScreen(),
+        AppRoutes.registerRouteName: (context) => const RegisterScreen(),
         AppRoutes.onBoardingRouteName: (context) => BlocProvider(
           create: (_) => OnboardingCubit(),
           child: const OnboardingTabs(),
