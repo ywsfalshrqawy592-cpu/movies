@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
+import '../../utils/size_utils.dart';
 
 /// Static EN / AR pill — English selected, as in the design (UI only).
 class LanguageSwitch extends StatelessWidget {
   const LanguageSwitch({super.key});
 
-  Widget _flag(String path, {bool selected = false}) {
+  Widget _flag(BuildContext context, String path, {bool selected = false}) {
+    final size = context.height * 0.041;
     return Container(
-      width: 38,
-      height: 38,
-      padding: const EdgeInsets.all(5),
+      width: size,
+      height: size,
+      padding: EdgeInsets.all(context.width * 0.012),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: selected ? AppColors.primaryColor : AppColors.transparentColor,
@@ -23,8 +25,8 @@ class LanguageSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 91,
-      height: 38,
+      width: context.width * 0.21,
+      height: context.height * 0.041,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         border: Border.all(color: AppColors.primaryColor, width: 2),
@@ -32,8 +34,8 @@ class LanguageSwitch extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _flag(AppAssets.flagUs, selected: true),
-          _flag(AppAssets.flagEg),
+          _flag(context, AppAssets.flagUs, selected: true),
+          _flag(context, AppAssets.flagEg),
         ],
       ),
     );
