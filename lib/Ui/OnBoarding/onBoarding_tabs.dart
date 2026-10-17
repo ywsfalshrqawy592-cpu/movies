@@ -8,7 +8,7 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
-import 'onboarding_cubit.dart';
+import '../../cubit/onboarding/onboarding_cubit.dart';
 
 class OnboardingTabs extends StatelessWidget {
   const OnboardingTabs({super.key});

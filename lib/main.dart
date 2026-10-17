@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:movies_app/Ui/OnBoarding/onboarding_cubit.dart';
+import 'package:movies_app/cubit/onboarding/onboarding_cubit.dart';
 import 'package:movies_app/Ui/screens/home/home_screen.dart';
 import 'package:movies_app/Ui/screens/auth/login_screen.dart';
 import 'package:movies_app/Ui/screens/auth/register_screen.dart';
@@ -26,9 +26,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: AppPrefs.onboardingSeen
-          ? AppRoutes.loginRouteName
-          : AppRoutes.onBoardingRouteName,
+      // initialRoute: AppPrefs.onboardingSeen
+      //     ? AppRoutes.loginRouteName
+      //     : AppRoutes.onBoardingRouteName,
+      initialRoute: AppRoutes.homeRouteName,
       routes: {
         AppRoutes.homeRouteName: (context) => const HomeScreen(),
         AppRoutes.loginRouteName: (context) => const LoginScreen(),
