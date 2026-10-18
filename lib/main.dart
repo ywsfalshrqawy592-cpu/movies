@@ -3,7 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movies_app/Ui/OnBoarding/onboarding_cubit.dart';
 import 'package:movies_app/Ui/language/language_cubit.dart';
-import 'package:movies_app/Ui/screens/home/home_screen.dart';
+import 'package:movies_app/Ui/screens/reset_password/reset_password_screen.dart';
+import 'package:movies_app/Ui/screens/update_profile/update_profile_screen.dart';
+import 'package:movies_app/features/auth/auth_scope.dart';
+import 'package:movies_app/features/auth/presentation/screens/auth_gate.dart';
+import 'package:movies_app/features/auth/presentation/screens/register_screen.dart';
+import 'package:movies_app/firebase_options.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'Ui/OnBoarding/onBoarding_tabs.dart';
@@ -13,11 +18,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPrefs.init();
   //await AppPrefs.setLanguageCode('ar');
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     BlocProvider(
       create: (_) => LanguageCubit(),
-      child: const MyApp(),
+      // AuthScope provides the authentication repository and the session cubit.
+      child: const AuthScope(child: MyApp()),
     ),
   );
 }
@@ -38,11 +44,18 @@ class MyApp extends StatelessWidget {
               ? AppRoutes.homeRouteName
               : AppRoutes.onBoardingRouteName,
           routes: {
-            AppRoutes.homeRouteName: (context) => const HomeScreen(),
+            // AuthGate shows the login screen, the email verification screen or
+            // the home screen, depending on the real provider session.
+            AppRoutes.homeRouteName: (context) => const AuthGate(),
             AppRoutes.onBoardingRouteName: (context) => BlocProvider(
               create: (_) => OnboardingCubit(),
               child: const OnboardingTabs(),
             ),
+            AppRoutes.registerRouteName: (context) => const RegisterScreen(),
+            AppRoutes.forgotPasswordRouteName: (context) =>
+                const ResetPasswordScreen(),
+            AppRoutes.updateProfileRouteName: (context) =>
+                const UpdateProfileScreen(),
           },
         );
       },

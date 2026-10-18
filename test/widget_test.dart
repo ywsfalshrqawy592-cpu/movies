@@ -1,18 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_localization/flutter_localization.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:movies_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:movies_app/main.dart';
 
-import '../lib/main.dart';
+import 'features/auth/fakes/fake_auth_repository.dart';
+import 'helpers/pump_app.dart';
 
 void main() {
   testWidgets('App renders correctly', (WidgetTester tester) async {
-    SharedPreferences.setMockInitialValues({});
-    await FlutterLocalization.instance.ensureInitialized();
+    final repository = FakeAuthRepository();
+    addTearDown(repository.dispose);
 
-    await tester.pumpWidget(const MyApp());
-    await tester.pumpAndSettle();
+    await pumpAuthApp(tester, repository);
 
     expect(find.byType(MyApp), findsOneWidget);
+    // A visitor without a session always starts on the login screen.
+    expect(find.byType(LoginScreen), findsOneWidget);
   });
 }

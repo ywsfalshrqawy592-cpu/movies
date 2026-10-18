@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:movies_app/Ui/widgets/custom_elevated_botton.dart';
 import 'package:movies_app/Ui/widgets/custom_text_field.dart';
+import 'package:movies_app/features/auth/presentation/widgets/delete_account_dialog.dart';
 import 'package:movies_app/utils/app_colors.dart';
-
+import 'package:movies_app/utils/app_routes.dart';
 
 class _C {
   static const bg = Color(0xFF121312);
@@ -118,7 +119,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    // TODO: Navigator.pushNamed(context, '/reset-password');
+                    Navigator.of(
+                      context,
+                    ).pushNamed(AppRoutes.forgotPasswordRouteName);
                   },
                   child: const Text(
                     'Reset Password',
@@ -132,9 +135,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 child: CustomElevatedBotton(
                   backgroundColor: _C.danger,
                   padding: 16,
-                  onPressed: () {
-                    // TODO: delete account
-                  },
+                  onPressed: () => DeleteAccountDialog.show(context),
                   child: const Text(
                     'Delete Account',
                     style: TextStyle(color: _C.white, fontSize: 16),
@@ -165,10 +166,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 }
 
 class _AvatarPickerSheet extends StatelessWidget {
-  const _AvatarPickerSheet({
-    required this.selected,
-    required this.onSelected,
-  });
+  const _AvatarPickerSheet({required this.selected, required this.onSelected});
 
   final int selected;
   final ValueChanged<int> onSelected;

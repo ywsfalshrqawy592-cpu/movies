@@ -21,6 +21,9 @@ class CustomTextField extends StatelessWidget {
   final OnValidator? validator;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
+  final bool? autofocus;
   final bool? obscureText;
   final int? maxLines;
   final bool? filled;
@@ -42,6 +45,9 @@ class CustomTextField extends StatelessWidget {
     this.onChange,
     this.validator,
     this.keyboardType,
+    this.textInputAction,
+    this.onFieldSubmitted,
+    this.autofocus,
     this.obscureText,
     this.maxLines,
     this.obscuringCharacter,
@@ -56,9 +62,12 @@ class CustomTextField extends StatelessWidget {
       cursorColor: cursorColor ?? AppColors.primaryColor,
       controller: controller,
       onChanged: onChange,
+      onFieldSubmitted: onFieldSubmitted,
+      autofocus: autofocus ?? false,
       validator: validator,
       style: style,
       keyboardType: keyboardType ?? TextInputType.text,
+      textInputAction: textInputAction,
       obscureText: obscureText ?? false,
       maxLines: obscureText == true ? 1 : maxLines,
       obscuringCharacter: obscuringCharacter ?? '*',
@@ -80,7 +89,7 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: filled,
-        fillColor:fillColor ,
+        fillColor: fillColor,
       ),
     );
   }
