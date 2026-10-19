@@ -10,9 +10,9 @@ class AppAssets {
   static String google = "assets/images/google.png";
   static String flagUs = "assets/images/flag_us.png";
   static String flagEg = "assets/images/flag_eg.png";
-  static String avatar_1 = "assets/images/avatar_1.png";
-  static String avatar_2 = "assets/images/avatar_2.png";
-  static String avatar_3 = "assets/images/avatar_3.png";
+  static String avatar_1 = "assets/images/profile_avatar_1.png";
+  static String avatar_2 = "assets/images/profile_avatar_2.png";
+  static String avatar_3 = "assets/images/profile_avatar_3.png";
   static const String hero1917 = "assets/images/hero_1917.png";
   static const String availableNow = "assets/images/available_now.png";
   static const String watchNow = "assets/images/watch_now.png";
@@ -23,4 +23,16 @@ class AppAssets {
   static const String star = "assets/images/star.png";
   static const String arrow = "assets/images/arrow.svg";
   static const String bottomNav = "assets/images/bottom_nav.svg";
+  static const String forgetPassword = "assets/images/forget_password.png";
+  static const List<String> profileAvatars = [
+    "assets/images/profile_avatar_1.png",
+    "assets/images/profile_avatar_2.png",
+    "assets/images/profile_avatar_3.png",
+    "assets/images/profile_avatar_4.png",
+    "assets/images/profile_avatar_5.png",
+    "assets/images/profile_avatar_6.png",
+    "assets/images/profile_avatar_7.png",
+    "assets/images/profile_avatar_8.png",
+    "assets/images/profile_avatar_9.png",
+  ];
 }

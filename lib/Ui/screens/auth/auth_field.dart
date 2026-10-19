@@ -10,6 +10,7 @@ class AuthField extends StatelessWidget {
   final IconData icon;
   final bool isPassword;
   final TextInputType? keyboardType;
+  final TextEditingController? controller;
 
   const AuthField({
     super.key,
@@ -17,6 +18,7 @@ class AuthField extends StatelessWidget {
     required this.icon,
     this.isPassword = false,
     this.keyboardType,
+    this.controller,
   });
 
   @override
@@ -25,6 +27,7 @@ class AuthField extends StatelessWidget {
 
     return CustomTextField(
       hintText: hint,
+      controller: controller,
       keyboardType: keyboardType,
       obscureText: isPassword,
       filled: true,
@@ -35,10 +38,10 @@ class AuthField extends StatelessWidget {
       prefixIcon: Icon(icon, color: AppColors.whiteColor, size: width * 0.065),
       suffixIcon: isPassword
           ? Icon(
-              Icons.visibility_off,
-              color: AppColors.whiteColor,
-              size: width * 0.06,
-            )
+        Icons.visibility_off,
+        color: AppColors.whiteColor,
+        size: width * 0.06,
+      )
           : null,
     );
   }
