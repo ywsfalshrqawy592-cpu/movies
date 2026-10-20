@@ -3,18 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movies_app/Ui/screens/home/home_screen.dart';
 import 'package:movies_app/Ui/screens/update_profile/update_profile_screen.dart';
-import 'package:movies_app/features/auth/domain/entities/app_user.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:movies_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
-import 'package:movies_app/features/auth/presentation/screens/auth_gate.dart';
-import 'package:movies_app/features/auth/presentation/screens/email_verification_screen.dart';
-import 'package:movies_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/cubits/auth_cubit.dart';
+import 'package:movies_app/Ui/screens/auth/auth_gate.dart';
+import 'package:movies_app/Ui/screens/auth/email_verification_screen.dart';
+import 'package:movies_app/Ui/screens/auth/login_screen.dart';
 import 'package:movies_app/main.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 
 import '../../../helpers/pump_app.dart';
-import '../fakes/fake_auth_repository.dart';
+import '../fakes/fake_auth_service.dart';
 
 void main() {
   const verifiedUser = AppUser(
@@ -29,9 +28,9 @@ void main() {
     emailVerified: false,
   );
 
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
 
-  setUp(() => repository = FakeAuthRepository());
+  setUp(() => repository = FakeAuthService());
   tearDown(() => repository.dispose());
 
   testWidgets('wires the repository and the session cubit of the app', (
@@ -41,12 +40,12 @@ void main() {
 
     final context = tester.element(find.byType(AuthGate));
 
-    expect(context.read<AuthRepository>(), same(repository));
+    expect(context.read<AuthCubit>().service, same(repository));
     expect(context.read<AuthCubit>(), isA<AuthCubit>());
   });
 
   testWidgets('restores the session of a verified user', (tester) async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     await pumpAuthApp(tester, repository);
 
     expect(find.byType(HomeScreen), findsOneWidget);
@@ -56,7 +55,7 @@ void main() {
   testWidgets('asks an unverified user to verify the email first', (
     tester,
   ) async {
-    repository = FakeAuthRepository(initialUser: unverifiedUser)
+    repository = FakeAuthService(initialUser: unverifiedUser)
       ..reloadUser = unverifiedUser;
     await pumpAuthApp(tester, repository);
 
@@ -79,7 +78,7 @@ void main() {
   testWidgets(
     'signs out from the home screen and returns to the login screen',
     (tester) async {
-      repository = FakeAuthRepository(initialUser: verifiedUser);
+      repository = FakeAuthService(initialUser: verifiedUser);
       await pumpAuthApp(tester, repository);
 
       await tester.tap(find.byIcon(Icons.logout));
@@ -100,7 +99,7 @@ void main() {
   testWidgets('closes a protected screen when the session ends', (
     tester,
   ) async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     await pumpAuthApp(tester, repository);
 
     await tester.tap(find.byIcon(Icons.person_outline));
@@ -122,7 +121,7 @@ void main() {
   testWidgets('handles repeated session events without extra navigation', (
     tester,
   ) async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     await pumpAuthApp(tester, repository);
 
     // Providers can deliver the same state more than once (reconnects, token
@@ -139,7 +138,7 @@ void main() {
   testWidgets('signing out keeps the data that is not part of the session', (
     tester,
   ) async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     await pumpAuthApp(tester, repository);
 
     await tester.tap(find.byIcon(Icons.logout));
@@ -155,7 +154,7 @@ void main() {
   });
 
   testWidgets('deletes the account after re-authentication', (tester) async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     await pumpAuthApp(tester, repository);
 
     await tester.tap(find.byIcon(Icons.person_outline));
@@ -182,7 +181,7 @@ void main() {
   });
 
   testWidgets('keeps the account when the password is wrong', (tester) async {
-    repository = FakeAuthRepository(initialUser: verifiedUser)
+    repository = FakeAuthService(initialUser: verifiedUser)
       ..reauthenticateFailure = const AuthFailure(
         AuthFailureType.invalidCredentials,
       );

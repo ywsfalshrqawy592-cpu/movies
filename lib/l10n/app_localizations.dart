@@ -320,6 +320,90 @@ abstract class AppLocalizations {
   /// **'If an account exists for this email, a reset link has been sent. Check your inbox.'**
   String get authResetLinkSent;
 
+  /// No description provided for @authNewPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a new password'**
+  String get authNewPasswordTitle;
+
+  /// No description provided for @authNewPasswordBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new password for {email}.'**
+  String authNewPasswordBody(String email);
+
+  /// No description provided for @authNewPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authNewPasswordLabel;
+
+  /// No description provided for @authConfirmNewPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm new password'**
+  String get authConfirmNewPasswordLabel;
+
+  /// No description provided for @authNewPasswordButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save new password'**
+  String get authNewPasswordButton;
+
+  /// No description provided for @authNewPasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your password has been updated. Sign in with your new password.'**
+  String get authNewPasswordSuccess;
+
+  /// No description provided for @authResetLinkProblemBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This password reset link cannot be used.'**
+  String get authResetLinkProblemBody;
+
+  /// No description provided for @authRequestNewResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a new reset link'**
+  String get authRequestNewResetLink;
+
+  /// No description provided for @authBackToLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to sign in'**
+  String get authBackToLogin;
+
+  /// No description provided for @authResetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get authResetPassword;
+
+  /// No description provided for @authUpdateData.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Data'**
+  String get authUpdateData;
+
+  /// No description provided for @authPickAvatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the avatar to change it'**
+  String get authPickAvatar;
+
+  /// No description provided for @authPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number (optional)'**
+  String get authPhoneLabel;
+
+  /// No description provided for @authProfileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile has been updated.'**
+  String get authProfileUpdated;
+
   /// No description provided for @authLogout.
   ///
   /// In en, this message translates to:
@@ -341,7 +425,7 @@ abstract class AppLocalizations {
   /// No description provided for @authDeleteAccount.
   ///
   /// In en, this message translates to:
-  /// **'Delete account'**
+  /// **'Delete Account'**
   String get authDeleteAccount;
 
   /// No description provided for @authDeleteAccountConfirmBody.
@@ -422,6 +506,12 @@ abstract class AppLocalizations {
   /// **'Please enter your name.'**
   String get authErrorNameRequired;
 
+  /// No description provided for @authErrorPhoneInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get authErrorPhoneInvalid;
+
   /// No description provided for @authErrorInvalidCredentials.
   ///
   /// In en, this message translates to:
@@ -475,6 +565,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This sign-in method is not available right now.'**
   String get authErrorOperationNotAllowed;
+
+  /// No description provided for @authErrorResetLinkInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'This reset link is invalid or has expired. Please request a new one.'**
+  String get authErrorResetLinkInvalid;
 
   /// No description provided for @authErrorUnexpected.
   ///

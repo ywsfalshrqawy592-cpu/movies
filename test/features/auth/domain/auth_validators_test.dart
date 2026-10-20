@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/validation/auth_validators.dart';
+import 'package:movies_app/Ui/auth/auth_validators.dart';
 
 void main() {
   group('AuthValidators.normalizeEmail', () {
@@ -110,6 +110,29 @@ void main() {
 
     test('accepts a name', () {
       expect(AuthValidators.validateName('Mona'), isNull);
+    });
+  });
+
+  group('AuthValidators.validatePhone', () {
+    test('accepts an empty optional phone', () {
+      expect(AuthValidators.validatePhone(''), isNull);
+      expect(AuthValidators.validatePhone(null), isNull);
+    });
+
+    test('accepts a phone with spaces, dashes and a country code', () {
+      expect(AuthValidators.validatePhone('+20 100 000 0000'), isNull);
+      expect(AuthValidators.validatePhone('0100-000-0000'), isNull);
+    });
+
+    test('rejects a malformed or too short phone', () {
+      expect(
+        AuthValidators.validatePhone('not-a-phone'),
+        PhoneValidationError.invalidFormat,
+      );
+      expect(
+        AuthValidators.validatePhone('123'),
+        PhoneValidationError.invalidFormat,
+      );
     });
   });
 }

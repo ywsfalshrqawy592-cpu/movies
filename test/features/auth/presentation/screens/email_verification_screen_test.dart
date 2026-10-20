@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/entities/app_user.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/presentation/screens/email_verification_screen.dart';
-import 'package:movies_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/screens/auth/email_verification_screen.dart';
+import 'package:movies_app/Ui/screens/auth/login_screen.dart';
 
 import '../../../../helpers/pump_app.dart';
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
   const unverifiedUser = AppUser(
@@ -16,10 +16,10 @@ void main() {
     emailVerified: false,
   );
 
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
 
   setUp(() {
-    repository = FakeAuthRepository(initialUser: unverifiedUser)
+    repository = FakeAuthService(initialUser: unverifiedUser)
       ..reloadUser = unverifiedUser;
   });
 

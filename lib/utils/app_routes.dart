@@ -10,6 +10,9 @@ class AppRoutes {
   /// Password reset request screen (the existing "forget password" UI).
   static const String forgotPasswordRouteName = "reset_password_screen";
 
+  /// Screen that sets a new password from a Firebase reset link (`oobCode`).
+  static const String newPasswordRouteName = "new_password_screen";
+
   /// Profile screen of the signed-in user.
   static const String updateProfileRouteName = "update_profile_screen";
 }

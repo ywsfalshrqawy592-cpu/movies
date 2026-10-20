@@ -51,10 +51,31 @@
   "authForgotPasswordTitle": "Forget Password",
   "authSendResetLink": "Send reset link",
   "authResetLinkSent": "If an account exists for this email, a reset link has been sent. Check your inbox.",
+  "authNewPasswordTitle": "Set a new password",
+  "authNewPasswordBody": "Choose a new password for {email}.",
+  "@authNewPasswordBody": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authNewPasswordLabel": "New password",
+  "authConfirmNewPasswordLabel": "Confirm new password",
+  "authNewPasswordButton": "Save new password",
+  "authNewPasswordSuccess": "Your password has been updated. Sign in with your new password.",
+  "authResetLinkProblemBody": "This password reset link cannot be used.",
+  "authRequestNewResetLink": "Request a new reset link",
+  "authBackToLogin": "Back to sign in",
+  "authResetPassword": "Reset Password",
+  "authUpdateData": "Update Data",
+  "authPickAvatar": "Tap the avatar to change it",
+  "authPhoneLabel": "Phone number (optional)",
+  "authProfileUpdated": "Your profile has been updated.",
   "authLogout": "Logout",
   "authLogoutConfirmBody": "Do you want to logout from this account?",
   "authCancel": "Cancel",
-  "authDeleteAccount": "Delete account",
+  "authDeleteAccount": "Delete Account",
   "authDeleteAccountConfirmBody": "This action permanently deletes your account. Enter your password to continue.",
   "authDeleteAccountConfirmButton": "Delete",
   "authDeleteAccountSuccess": "Your account has been deleted.",
@@ -75,6 +96,7 @@
   "authErrorConfirmPasswordRequired": "Please confirm your password.",
   "authErrorPasswordsDoNotMatch": "Passwords do not match.",
   "authErrorNameRequired": "Please enter your name.",
+  "authErrorPhoneInvalid": "Please enter a valid phone number.",
   "authErrorInvalidCredentials": "Incorrect email or password.",
   "authErrorEmailInUse": "This email is already registered.",
   "authErrorWeakPassword": "This password is too weak.",
@@ -84,5 +106,6 @@
   "authErrorUserDisabled": "This account has been disabled.",
   "authErrorRequiresRecentLogin": "Please sign in again to continue.",
   "authErrorOperationNotAllowed": "This sign-in method is not available right now.",
+  "authErrorResetLinkInvalid": "This reset link is invalid or has expired. Please request a new one.",
   "authErrorUnexpected": "Something went wrong. Please try again."
 }

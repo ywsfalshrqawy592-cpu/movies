@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movies_app/Ui/screens/reset_password/reset_password_screen.dart';
-import 'package:movies_app/features/auth/domain/entities/app_user.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/presentation/screens/auth_gate.dart';
-import 'package:movies_app/features/auth/presentation/screens/login_screen.dart';
-import 'package:movies_app/features/auth/presentation/screens/register_screen.dart';
-import 'package:movies_app/features/auth/presentation/widgets/auth_form_message.dart';
+import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/screens/auth/auth_gate.dart';
+import 'package:movies_app/Ui/screens/auth/login_screen.dart';
+import 'package:movies_app/Ui/screens/auth/register_screen.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_form_message.dart';
 
 import '../../../../helpers/pump_app.dart';
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
 
-  setUp(() => repository = FakeAuthRepository());
+  setUp(() => repository = FakeAuthService());
   tearDown(() => repository.dispose());
 
   Future<void> enterCredentials(

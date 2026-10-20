@@ -128,6 +128,52 @@ class AppLocalizationsAr extends AppLocalizations {
       'إذا كان هناك حساب بهذا البريد الإلكتروني فقد أُرسل رابط إعادة التعيين. تحقق من صندوق الوارد.';
 
   @override
+  String get authNewPasswordTitle => 'تعيين كلمة مرور جديدة';
+
+  @override
+  String authNewPasswordBody(String email) {
+    return 'اختر كلمة مرور جديدة لـ $email.';
+  }
+
+  @override
+  String get authNewPasswordLabel => 'كلمة المرور الجديدة';
+
+  @override
+  String get authConfirmNewPasswordLabel => 'تأكيد كلمة المرور الجديدة';
+
+  @override
+  String get authNewPasswordButton => 'حفظ كلمة المرور الجديدة';
+
+  @override
+  String get authNewPasswordSuccess =>
+      'تم تحديث كلمة المرور. سجّل الدخول بكلمة المرور الجديدة.';
+
+  @override
+  String get authResetLinkProblemBody =>
+      'لا يمكن استخدام رابط إعادة تعيين كلمة المرور هذا.';
+
+  @override
+  String get authRequestNewResetLink => 'طلب رابط إعادة تعيين جديد';
+
+  @override
+  String get authBackToLogin => 'العودة لتسجيل الدخول';
+
+  @override
+  String get authResetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get authUpdateData => 'تحديث البيانات';
+
+  @override
+  String get authPickAvatar => 'اضغط على الصورة لتغييرها';
+
+  @override
+  String get authPhoneLabel => 'رقم الهاتف (اختياري)';
+
+  @override
+  String get authProfileUpdated => 'تم تحديث ملفك الشخصي.';
+
+  @override
   String get authLogout => 'تسجيل الخروج';
 
   @override
@@ -184,6 +230,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get authErrorNameRequired => 'من فضلك أدخل اسمك.';
 
   @override
+  String get authErrorPhoneInvalid => 'من فضلك أدخل رقم هاتف صحيحًا.';
+
+  @override
   String get authErrorInvalidCredentials =>
       'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
 
@@ -214,6 +263,10 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get authErrorOperationNotAllowed =>
       'طريقة تسجيل الدخول هذه غير متاحة حاليًا.';
+
+  @override
+  String get authErrorResetLinkInvalid =>
+      'رابط إعادة التعيين غير صالح أو انتهت صلاحيته. من فضلك اطلب رابطًا جديدًا.';
 
   @override
   String get authErrorUnexpected => 'حدث خطأ ما. من فضلك حاول مرة أخرى.';

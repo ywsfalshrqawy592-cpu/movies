@@ -1,24 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/usecases/delete_account.dart';
-import 'package:movies_app/features/auth/domain/usecases/reauthenticate_with_password.dart';
-import 'package:movies_app/features/auth/presentation/cubits/delete_account/delete_account_cubit.dart';
-import 'package:movies_app/features/auth/presentation/cubits/delete_account/delete_account_state.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/cubits/delete_account_cubit.dart';
 
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
   late DeleteAccountCubit cubit;
 
   setUp(() {
-    repository = FakeAuthRepository();
-    cubit = DeleteAccountCubit(
-      reauthenticateWithPassword: ReauthenticateWithPassword(repository),
-      deleteAccount: DeleteAccount(repository),
-    );
+    repository = FakeAuthService();
+    cubit = DeleteAccountCubit(repository);
   });
 
   tearDown(() async {

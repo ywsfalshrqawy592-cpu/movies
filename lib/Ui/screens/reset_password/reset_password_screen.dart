@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/Ui/auth/auth_messages.dart';
+import 'package:movies_app/Ui/auth/auth_validators.dart';
+import 'package:movies_app/Ui/auth/cubits/auth_cubit.dart';
+import 'package:movies_app/Ui/auth/cubits/forgot_password_cubit.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_form_message.dart';
 import 'package:movies_app/Ui/widgets/custom_elevated_botton.dart';
 import 'package:movies_app/Ui/widgets/custom_text_field.dart';
-import 'package:movies_app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:movies_app/features/auth/domain/usecases/send_password_reset_email.dart';
-import 'package:movies_app/features/auth/domain/validation/auth_validators.dart';
-import 'package:movies_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
-import 'package:movies_app/features/auth/presentation/cubits/forgot_password/forgot_password_state.dart';
-import 'package:movies_app/features/auth/presentation/helpers/auth_messages.dart';
-import 'package:movies_app/features/auth/presentation/widgets/auth_form_message.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
@@ -37,11 +35,8 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ForgotPasswordCubit>(
-      create: (context) => ForgotPasswordCubit(
-        sendPasswordResetEmail: SendPasswordResetEmail(
-          context.read<AuthRepository>(),
-        ),
-      ),
+      create: (context) =>
+          ForgotPasswordCubit(context.read<AuthCubit>().service),
       child: const _ResetPasswordView(),
     );
   }
@@ -116,6 +111,8 @@ class _ResetPasswordViewState extends State<_ResetPasswordView> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.done,
                     onFieldSubmitted: (_) => _submit(),
+                    onChange: (_) =>
+                        context.read<ForgotPasswordCubit>().clearResult(),
                     hintText: l10n.authEmailLabel,
                     hintStyle: const TextStyle(color: _C.white, fontSize: 14),
                     prefixIcon: const Icon(Icons.email, color: _C.white),

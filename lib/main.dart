@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movies_app/Ui/OnBoarding/onboarding_cubit.dart';
 import 'package:movies_app/Ui/language/language_cubit.dart';
+import 'package:movies_app/Ui/auth/auth_scope.dart';
+import 'package:movies_app/Ui/screens/auth/auth_gate.dart';
+import 'package:movies_app/Ui/screens/auth/new_password_screen.dart';
+import 'package:movies_app/Ui/screens/auth/register_screen.dart';
 import 'package:movies_app/Ui/screens/reset_password/reset_password_screen.dart';
 import 'package:movies_app/Ui/screens/update_profile/update_profile_screen.dart';
-import 'package:movies_app/features/auth/auth_scope.dart';
-import 'package:movies_app/features/auth/presentation/screens/auth_gate.dart';
-import 'package:movies_app/features/auth/presentation/screens/register_screen.dart';
 import 'package:movies_app/firebase_options.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -56,6 +57,17 @@ class MyApp extends StatelessWidget {
                 const ResetPasswordScreen(),
             AppRoutes.updateProfileRouteName: (context) =>
                 const UpdateProfileScreen(),
+          },
+          onGenerateRoute: (settings) {
+            if (settings.name == AppRoutes.newPasswordRouteName) {
+              final code = settings.arguments;
+              return MaterialPageRoute<void>(
+                settings: settings,
+                builder: (_) =>
+                    NewPasswordScreen(oobCode: code is String ? code : ''),
+              );
+            }
+            return null;
           },
         );
       },

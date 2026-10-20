@@ -1,20 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/usecases/register_with_email.dart';
-import 'package:movies_app/features/auth/presentation/cubits/register/register_cubit.dart';
-import 'package:movies_app/features/auth/presentation/cubits/register/register_state.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/cubits/register_cubit.dart';
 
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
   late RegisterCubit cubit;
 
   setUp(() {
-    repository = FakeAuthRepository();
-    cubit = RegisterCubit(registerWithEmail: RegisterWithEmail(repository));
+    repository = FakeAuthService();
+    cubit = RegisterCubit(repository);
   });
 
   tearDown(() async {

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/validation/auth_validators.dart';
-import 'package:movies_app/features/auth/presentation/helpers/auth_messages.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/auth_validators.dart';
+import 'package:movies_app/Ui/auth/auth_messages.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/l10n/app_localizations_ar.dart';
 import 'package:movies_app/l10n/app_localizations_en.dart';

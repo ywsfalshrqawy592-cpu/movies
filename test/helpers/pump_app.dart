@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:movies_app/Ui/auth/auth_scope.dart';
 import 'package:movies_app/Ui/language/language_cubit.dart';
-import 'package:movies_app/features/auth/auth_scope.dart';
 import 'package:movies_app/main.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../features/auth/fakes/fake_auth_repository.dart';
+import '../features/auth/fakes/fake_auth_service.dart';
 
 /// Pumps the real app (same providers and routes as `main.dart`) on top of a
-/// fake authentication repository, so widget tests never touch Firebase.
+/// fake authentication service, so widget tests never touch Firebase.
 Future<void> pumpAuthApp(
   WidgetTester tester,
-  FakeAuthRepository repository, {
+  FakeAuthService service, {
   bool onboardingSeen = true,
   String languageCode = 'en',
+  String profilePhone = '',
 }) async {
   SharedPreferences.setMockInitialValues({
     'onboarding_seen': onboardingSeen,
     'language_code': languageCode,
+    'profile_phone': profilePhone,
   });
   await AppPrefs.init();
 
   await tester.pumpWidget(
     BlocProvider(
       create: (_) => LanguageCubit(),
-      child: AuthScope(repository: repository, child: const MyApp()),
+      child: AuthScope(service: service, child: const MyApp()),
     ),
   );
   await pumpFrames(tester);

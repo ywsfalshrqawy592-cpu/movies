@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movies_app/Ui/screens/home/home_screen.dart';
-import 'package:movies_app/features/auth/domain/entities/app_user.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/presentation/screens/email_verification_screen.dart';
-import 'package:movies_app/features/auth/presentation/screens/register_screen.dart';
+import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/screens/auth/email_verification_screen.dart';
+import 'package:movies_app/Ui/screens/auth/register_screen.dart';
 
 import '../../../../helpers/pump_app.dart';
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
 
-  setUp(() => repository = FakeAuthRepository());
+  setUp(() => repository = FakeAuthService());
   tearDown(() => repository.dispose());
 
   Future<void> openRegistration(WidgetTester tester) async {

@@ -1,22 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/usecases/send_password_reset_email.dart';
-import 'package:movies_app/features/auth/presentation/cubits/forgot_password/forgot_password_cubit.dart';
-import 'package:movies_app/features/auth/presentation/cubits/forgot_password/forgot_password_state.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/cubits/forgot_password_cubit.dart';
 
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
   late ForgotPasswordCubit cubit;
 
   setUp(() {
-    repository = FakeAuthRepository();
-    cubit = ForgotPasswordCubit(
-      sendPasswordResetEmail: SendPasswordResetEmail(repository),
-    );
+    repository = FakeAuthService();
+    cubit = ForgotPasswordCubit(repository);
   });
 
   tearDown(() async {

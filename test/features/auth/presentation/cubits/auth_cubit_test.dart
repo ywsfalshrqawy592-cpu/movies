@@ -1,13 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/entities/app_user.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/usecases/reload_auth_user.dart';
-import 'package:movies_app/features/auth/domain/usecases/sign_out.dart';
-import 'package:movies_app/features/auth/domain/usecases/watch_auth_state.dart';
-import 'package:movies_app/features/auth/presentation/cubits/auth/auth_cubit.dart';
-import 'package:movies_app/features/auth/presentation/cubits/auth/auth_state.dart';
+import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/cubits/auth_cubit.dart';
 
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
   const verifiedUser = AppUser(
@@ -21,18 +17,14 @@ void main() {
     emailVerified: false,
   );
 
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
 
-  setUp(() => repository = FakeAuthRepository());
+  setUp(() => repository = FakeAuthService());
 
   tearDown(() => repository.dispose());
 
-  AuthCubit buildCubit({bool requireEmailVerification = true}) => AuthCubit(
-    watchAuthState: WatchAuthState(repository),
-    reloadAuthUser: ReloadAuthUser(repository),
-    signOut: SignOut(repository),
-    requireEmailVerification: requireEmailVerification,
-  );
+  AuthCubit buildCubit({bool requireEmailVerification = true}) =>
+      AuthCubit(repository, requireEmailVerification: requireEmailVerification);
 
   test('starts in the unknown state while the session is restored', () {
     final cubit = buildCubit();
@@ -52,7 +44,7 @@ void main() {
   });
 
   test('becomes authenticated when the restored user is verified', () async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     final cubit = buildCubit();
 
     await pumpEventQueue();
@@ -63,7 +55,7 @@ void main() {
   });
 
   test('requires the email verification by default', () async {
-    repository = FakeAuthRepository(initialUser: unverifiedUser);
+    repository = FakeAuthService(initialUser: unverifiedUser);
     final cubit = buildCubit();
 
     await pumpEventQueue();
@@ -74,7 +66,7 @@ void main() {
   });
 
   test('can accept unverified users when the policy allows it', () async {
-    repository = FakeAuthRepository(initialUser: unverifiedUser);
+    repository = FakeAuthService(initialUser: unverifiedUser);
     final cubit = buildCubit(requireEmailVerification: false);
 
     await pumpEventQueue();
@@ -84,7 +76,7 @@ void main() {
   });
 
   test('refreshUser reports that the email is verified', () async {
-    repository = FakeAuthRepository(initialUser: unverifiedUser);
+    repository = FakeAuthService(initialUser: unverifiedUser);
     repository.reloadUser = verifiedUser;
     final cubit = buildCubit();
     await pumpEventQueue();
@@ -99,7 +91,7 @@ void main() {
   });
 
   test('refreshUser reports that the email is still not verified', () async {
-    repository = FakeAuthRepository(initialUser: unverifiedUser);
+    repository = FakeAuthService(initialUser: unverifiedUser);
     repository.reloadUser = unverifiedUser;
     final cubit = buildCubit();
     await pumpEventQueue();
@@ -112,7 +104,7 @@ void main() {
   });
 
   test('refreshUser reports a failure without changing the session', () async {
-    repository = FakeAuthRepository(initialUser: unverifiedUser);
+    repository = FakeAuthService(initialUser: unverifiedUser);
     repository.reloadFailure = const AuthFailure(AuthFailureType.networkError);
     final cubit = buildCubit();
     await pumpEventQueue();
@@ -128,7 +120,7 @@ void main() {
   });
 
   test('signOut ends the session through the repository', () async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     final cubit = buildCubit();
     await pumpEventQueue();
 
@@ -141,7 +133,7 @@ void main() {
   });
 
   test('signOut forwards the failure to the caller', () async {
-    repository = FakeAuthRepository(initialUser: verifiedUser);
+    repository = FakeAuthService(initialUser: verifiedUser);
     repository.signOutFailure = const AuthFailure(AuthFailureType.networkError);
     final cubit = buildCubit();
     await pumpEventQueue();

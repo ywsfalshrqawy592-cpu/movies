@@ -1,20 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/domain/failures/auth_failure.dart';
-import 'package:movies_app/features/auth/domain/usecases/send_email_verification.dart';
-import 'package:movies_app/features/auth/presentation/cubits/email_verification/email_verification_cubit.dart';
-import 'package:movies_app/features/auth/presentation/cubits/email_verification/email_verification_state.dart';
+import 'package:movies_app/Ui/auth/auth_failure.dart';
+import 'package:movies_app/Ui/auth/cubits/email_verification_cubit.dart';
 
-import '../../fakes/fake_auth_repository.dart';
+import '../../fakes/fake_auth_service.dart';
 
 void main() {
-  late FakeAuthRepository repository;
+  late FakeAuthService repository;
   late EmailVerificationCubit cubit;
 
   setUp(() {
-    repository = FakeAuthRepository();
-    cubit = EmailVerificationCubit(
-      sendEmailVerification: SendEmailVerification(repository),
-    );
+    repository = FakeAuthService();
+    cubit = EmailVerificationCubit(repository);
   });
 
   tearDown(() async {

@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:movies_app/Ui/screens/auth/login_screen.dart';
 import 'package:movies_app/main.dart';
 
-import 'features/auth/fakes/fake_auth_repository.dart';
+import 'features/auth/fakes/fake_auth_service.dart';
 import 'helpers/pump_app.dart';
 
 void main() {
   testWidgets('App renders correctly', (WidgetTester tester) async {
-    final repository = FakeAuthRepository();
+    final repository = FakeAuthService();
     addTearDown(repository.dispose);
 
     await pumpAuthApp(tester, repository);

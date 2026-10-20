@@ -128,6 +128,52 @@ class AppLocalizationsEn extends AppLocalizations {
       'If an account exists for this email, a reset link has been sent. Check your inbox.';
 
   @override
+  String get authNewPasswordTitle => 'Set a new password';
+
+  @override
+  String authNewPasswordBody(String email) {
+    return 'Choose a new password for $email.';
+  }
+
+  @override
+  String get authNewPasswordLabel => 'New password';
+
+  @override
+  String get authConfirmNewPasswordLabel => 'Confirm new password';
+
+  @override
+  String get authNewPasswordButton => 'Save new password';
+
+  @override
+  String get authNewPasswordSuccess =>
+      'Your password has been updated. Sign in with your new password.';
+
+  @override
+  String get authResetLinkProblemBody =>
+      'This password reset link cannot be used.';
+
+  @override
+  String get authRequestNewResetLink => 'Request a new reset link';
+
+  @override
+  String get authBackToLogin => 'Back to sign in';
+
+  @override
+  String get authResetPassword => 'Reset Password';
+
+  @override
+  String get authUpdateData => 'Update Data';
+
+  @override
+  String get authPickAvatar => 'Tap the avatar to change it';
+
+  @override
+  String get authPhoneLabel => 'Phone number (optional)';
+
+  @override
+  String get authProfileUpdated => 'Your profile has been updated.';
+
+  @override
   String get authLogout => 'Logout';
 
   @override
@@ -138,7 +184,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authCancel => 'Cancel';
 
   @override
-  String get authDeleteAccount => 'Delete account';
+  String get authDeleteAccount => 'Delete Account';
 
   @override
   String get authDeleteAccountConfirmBody =>
@@ -186,6 +232,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authErrorNameRequired => 'Please enter your name.';
 
   @override
+  String get authErrorPhoneInvalid => 'Please enter a valid phone number.';
+
+  @override
   String get authErrorInvalidCredentials => 'Incorrect email or password.';
 
   @override
@@ -215,6 +264,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authErrorOperationNotAllowed =>
       'This sign-in method is not available right now.';
+
+  @override
+  String get authErrorResetLinkInvalid =>
+      'This reset link is invalid or has expired. Please request a new one.';
 
   @override
   String get authErrorUnexpected => 'Something went wrong. Please try again.';
