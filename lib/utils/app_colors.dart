@@ -12,4 +12,9 @@ class AppColors {
   static const Color backgroundColor = Color(0xFF121312);
   static const Color fieldColor = Color(0xFF282A28);
 
+  /// Background of the dark screens of the app.
+  static const Color darkBackgroundColor = Color(0xFF121312);
+
+  /// Background of the input fields (and elevated surfaces) on dark screens.
+  static const Color darkFieldColor = Color(0xFF282A28);
 }
