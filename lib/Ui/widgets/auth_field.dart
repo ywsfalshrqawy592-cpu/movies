@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/app_colors.dart';
+import '../../utils/app_styles.dart';
 import '../../utils/size_utils.dart';
 import 'custom_text_field.dart';
 
@@ -33,8 +34,8 @@ class AuthField extends StatelessWidget {
       filled: true,
       fillColor: AppColors.fieldColor,
       borderColor: AppColors.fieldColor,
-      style: TextStyle(color: AppColors.whiteColor, fontSize: 16),
-      hintStyle: TextStyle(color: AppColors.whiteColor, fontSize: 16),
+      style: AppStyles.regular16White,
+      hintStyle: AppStyles.regular16White,
       prefixIcon: Icon(icon, color: AppColors.whiteColor, size: width * 0.065),
       suffixIcon: isPassword
           ? Icon(

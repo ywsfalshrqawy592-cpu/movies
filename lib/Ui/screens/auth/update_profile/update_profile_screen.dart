@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/Ui/widgets/auth_field.dart';
 import 'package:movies_app/Ui/widgets/custom_elevated_botton.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_styles.dart';
 
 import '../../../../cubit/update_profile/update_profile_cubit.dart';
 import '../../../../cubit/update_profile/update_profile_state.dart';
@@ -63,9 +64,9 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
           icon: const Icon(Icons.arrow_back, color: AppColors.primaryColor),
           onPressed: () => Navigator.maybePop(context),
         ),
-        title: const Text(
+        title: Text(
           'Pick Avatar',
-          style: TextStyle(color: AppColors.primaryColor, fontSize: 16),
+          style: AppStyles.regular16Primary,
         ),
       ),
       body: SafeArea(
@@ -105,9 +106,9 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
                   onPressed: () {
                     // TODO: Navigator.pushNamed(context, AppRoutes.resetPassword);
                   },
-                  child: const Text(
+                  child: Text(
                     'Reset Password',
-                    style: TextStyle(color: AppColors.whiteColor, fontSize: 14),
+                    style: AppStyles.regular14White,
                   ),
                 ),
               ),
@@ -120,9 +121,9 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
                   onPressed: () {
                     // TODO: delete account
                   },
-                  child: const Text(
+                  child: Text(
                     'Delete Account',
-                    style: TextStyle(color: AppColors.whiteColor, fontSize: 16),
+                    style: AppStyles.regular16White,
                   ),
                 ),
               ),
@@ -134,9 +135,9 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
                   onPressed: () {
                     // TODO: update profile
                   },
-                  child: const Text(
+                  child: Text(
                     'Update Data',
-                    style: TextStyle(color: AppColors.blackColor, fontSize: 16),
+                    style: AppStyles.regular16Black,
                   ),
                 ),
               ),

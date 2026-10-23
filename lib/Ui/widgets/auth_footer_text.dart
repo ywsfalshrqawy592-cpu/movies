@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/app_colors.dart';
+import '../../utils/app_styles.dart';
 import '../../utils/size_utils.dart';
 
 /// "Don't Have Account ? Create One" style line.
@@ -22,15 +23,12 @@ class AuthFooterText extends StatelessWidget {
       onTap: onTap,
       child: Text.rich(
         TextSpan(
-          style: TextStyle(fontSize: 14, color: AppColors.whiteColor),
+          style: AppStyles.regular14White,
           children: [
             TextSpan(text: '$question '),
             TextSpan(
               text: action,
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontWeight: FontWeight.w900,
-              ),
+              style: AppStyles.bold14Primary,
             ),
           ],
         ),
@@ -58,7 +56,7 @@ class OrDivider extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: width * 0.026),
           child: Text(
             'OR',
-            style: TextStyle(color: AppColors.primaryColor, fontSize: 15),
+            style: AppStyles.regular15Primary,
           ),
         ),
         line,

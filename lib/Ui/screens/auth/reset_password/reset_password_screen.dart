@@ -3,6 +3,7 @@ import 'package:movies_app/Ui/widgets/auth_field.dart';
 import 'package:movies_app/Ui/widgets/custom_elevated_botton.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_styles.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -32,9 +33,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           icon: const Icon(Icons.arrow_back, color: AppColors.primaryColor),
           onPressed: () => Navigator.maybePop(context),
         ),
-        title: const Text(
+        title: Text(
           'Forget Password',
-          style: TextStyle(color: AppColors.primaryColor, fontSize: 16),
+          style: AppStyles.regular16Primary,
         ),
       ),
       body: SafeArea(
@@ -63,9 +64,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   onPressed: () {
                     // TODO: verify email / reset password logic
                   },
-                  child: const Text(
+                  child: Text(
                     'Verify Email',
-                    style: TextStyle(color: AppColors.blackColor, fontSize: 16),
+                    style: AppStyles.regular16Black,
                   ),
                 ),
               ),

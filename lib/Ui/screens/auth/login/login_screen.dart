@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_routes.dart';
+import '../../../../utils/app_styles.dart';
 import '../../../../utils/size_utils.dart';
 import '../../../widgets/auth_footer_text.dart';
 import '../../../widgets/custom_elevated_botton.dart';
@@ -47,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
                   'Forget Password ?',
-                  style: TextStyle(color: AppColors.primaryColor, fontSize: 14),
+                  style: AppStyles.regular14Primary,
                 ),
               ),
               SizedBox(height: height * 0.035),
@@ -61,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Text(
                     'Login',
-                    style: TextStyle(color: AppColors.fieldColor, fontSize: 20),
+                    style: AppStyles.regular20Field,
                   ),
                 ),
               ),
@@ -91,10 +92,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(width: width * 0.023),
                       Text(
                         'Login With Google',
-                        style: TextStyle(
-                          color: AppColors.fieldColor,
-                          fontSize: 16,
-                        ),
+                        style: AppStyles.regular16Field,
                       ),
                     ],
                   ),

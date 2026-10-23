@@ -108,10 +108,7 @@ class OnboardingTabs extends StatelessWidget {
                           Text(
                             description[index - 1],
                             textAlign: TextAlign.center,
-                            style: AppStyles.bold20gray.copyWith(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                            style: AppStyles.regular16White,
                           ),
                         ],
                       ],

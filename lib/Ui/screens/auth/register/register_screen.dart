@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_styles.dart';
 import '../../../../utils/size_utils.dart';
 import '../../../widgets/auth_footer_text.dart';
 import '../../../widgets/custom_elevated_botton.dart';
@@ -28,7 +29,7 @@ class RegisterScreen extends StatelessWidget {
         ),
         title: Text(
           'Register',
-          style: TextStyle(color: AppColors.primaryColor, fontSize: 16),
+          style: AppStyles.regular16Primary,
         ),
       ),
       body: SingleChildScrollView(
@@ -59,7 +60,7 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(height: height * 0.01),
             Text(
               'Avatar',
-              style: TextStyle(color: AppColors.whiteColor, fontSize: 16),
+              style: AppStyles.regular16White,
             ),
             SizedBox(height: height * 0.013),
             AuthField(hint: 'Name', icon: Icons.badge_outlined),
@@ -91,10 +92,7 @@ class RegisterScreen extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   'Create Account',
-                  style: TextStyle(
-                    color: AppColors.backgroundColor,
-                    fontSize: 20,
-                  ),
+                  style: AppStyles.regular20Background,
                 ),
               ),
             ),

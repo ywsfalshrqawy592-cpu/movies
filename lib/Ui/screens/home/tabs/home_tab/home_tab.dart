@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../cubit/home/featured_carousel_cubit.dart';
 import '../../../../../utils/app_assets.dart';
 import '../../../../../utils/app_colors.dart';
+import '../../../../../utils/app_styles.dart';
 import '../../../../../utils/size_utils.dart';
 
 class HomeTab extends StatefulWidget {
@@ -125,16 +126,14 @@ class _HomeTabState extends State<HomeTab> {
                           children: [
                             Text(
                               'Action',
-                              style: TextStyle(
-                                color: Colors.white,
+                              style: AppStyles.regularDynamicWhite.copyWith(
                                 fontSize: width * .047,
                               ),
                             ),
                             const Spacer(),
                             Text(
                               'See More',
-                              style: TextStyle(
-                                color: AppColors.primaryColor,
+                              style: AppStyles.regularDynamicPrimary.copyWith(
                                 fontSize: width * .037,
                               ),
                             ),
@@ -278,7 +277,9 @@ class _Rating extends StatelessWidget {
         children: [
           Text(
             rating,
-            style: TextStyle(color: Colors.white, fontSize: width * .037),
+            style: AppStyles.regularDynamicWhite.copyWith(
+              fontSize: width * .037,
+            ),
           ),
           SizedBox(width: width * .009),
           Image.asset(
