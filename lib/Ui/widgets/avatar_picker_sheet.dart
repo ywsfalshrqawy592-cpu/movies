@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/models/avatar_model.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-import '../update_profile_cubit.dart';
-import '../update_profile_state.dart';
+import '../../cubit/update_profile/update_profile_cubit.dart';
+import '../../cubit/update_profile/update_profile_state.dart';
 import 'avatar_item.dart';
 
 class AvatarPickerSheet extends StatelessWidget {

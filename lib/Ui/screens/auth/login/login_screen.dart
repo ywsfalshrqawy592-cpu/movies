@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_assets.dart';
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_routes.dart';
-import '../../../utils/size_utils.dart';
-import '../../widgets/auth_footer_text.dart';
-import '../../widgets/custom_elevated_botton.dart';
-import '../../widgets/language_switch.dart';
-import 'auth_field.dart';
+import '../../../../utils/app_assets.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_routes.dart';
+import '../../../../utils/size_utils.dart';
+import '../../../widgets/auth_footer_text.dart';
+import '../../../widgets/custom_elevated_botton.dart';
+import '../../../widgets/language_switch.dart';
+import '../../../widgets/auth_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

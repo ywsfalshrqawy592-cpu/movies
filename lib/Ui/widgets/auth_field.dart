@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/size_utils.dart';
-import '../../widgets/custom_text_field.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/size_utils.dart';
+import 'custom_text_field.dart';
 
 /// The dark rounded input from the design, built on the team's CustomTextField.
 class AuthField extends StatelessWidget {

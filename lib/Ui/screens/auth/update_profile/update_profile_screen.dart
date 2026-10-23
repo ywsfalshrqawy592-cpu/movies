@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/Ui/screens/auth/auth_field.dart';
+import 'package:movies_app/Ui/widgets/auth_field.dart';
 import 'package:movies_app/Ui/widgets/custom_elevated_botton.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-import 'update_profile_cubit.dart';
-import 'update_profile_state.dart';
-import 'widgets/avatar_picker_sheet.dart';
-import 'widgets/profile_avatar.dart';
+import '../../../../cubit/update_profile/update_profile_cubit.dart';
+import '../../../../cubit/update_profile/update_profile_state.dart';
+import '../../../widgets/avatar_picker_sheet.dart';
+import '../../../widgets/profile_avatar.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({super.key});
