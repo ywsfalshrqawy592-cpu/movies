@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/Ui/auth/auth_failure.dart';
-import 'package:movies_app/Ui/auth/auth_service.dart';
-import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_failure.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_service.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_user.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 
 /// Status of the profile update request.

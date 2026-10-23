@@ -270,4 +270,72 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get authErrorUnexpected => 'حدث خطأ ما. من فضلك حاول مرة أخرى.';
+
+  @override
+  String get languageEnglish => 'الإنجليزية';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get onboardingHeroTitle => 'اكتشف فيلمك المفضل\nالقادم هنا';
+
+  @override
+  String get onboardingHeroDescription =>
+      'استمتع بمكتبة ضخمة من الأفلام\nتناسب جميع الأذواق.';
+
+  @override
+  String get onboardingDiscoverTitle => 'اكتشف الأفلام';
+
+  @override
+  String get onboardingDiscoverDescription =>
+      'استكشف مجموعة واسعة من الأفلام بمختلف الجودات والأنواع، واعثر بسهولة على فيلمك المفضل القادم.';
+
+  @override
+  String get onboardingGenresTitle => 'استكشف جميع الأنواع';
+
+  @override
+  String get onboardingGenresDescription =>
+      'اكتشف أفلامًا من كل الأنواع وبمختلف الجودات، واعثر كل يوم على شيء جديد وممتع لمشاهدته.';
+
+  @override
+  String get onboardingWatchlistsTitle => 'أنشئ قوائم المشاهدة';
+
+  @override
+  String get onboardingWatchlistsDescription =>
+      'أضف الأفلام إلى قائمتك لتتابع ما تريد مشاهدته لاحقًا، واستمتع بأفلام متنوعة من حيث النوع والجودة.';
+
+  @override
+  String get onboardingRateReviewTitle => 'قيّم وراجع واكتشف';
+
+  @override
+  String get onboardingRateReviewDescription =>
+      'شارك آراءك حول الأفلام التي شاهدتها، واكتب مراجعات تساعد الآخرين على اكتشاف أفلام رائعة.';
+
+  @override
+  String get onboardingStartWatchingTitle => 'ابدأ المشاهدة الآن';
+
+  @override
+  String get onboardingExplore => 'استكشف الآن';
+
+  @override
+  String get onboardingFinish => 'إنهاء';
+
+  @override
+  String get onboardingNext => 'التالي';
+
+  @override
+  String get onboardingBack => 'السابق';
+
+  @override
+  String get homeAvailableNow => 'متاح الآن';
+
+  @override
+  String get homeWatchNow => 'شاهد الآن';
+
+  @override
+  String get homeActionGenre => 'أكشن';
+
+  @override
+  String get homeSeeMore => 'عرض المزيد';
 }

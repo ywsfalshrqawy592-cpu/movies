@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
-import 'package:movies_app/utils/size_utils.dart';
 
-/// Branding + title block shown on top of the login and register screens.
+/// Title and optional subtitle shown on an authentication screen.
 class AuthHeader extends StatelessWidget {
   const AuthHeader({super.key, required this.title, this.subtitle});
 
@@ -16,8 +15,9 @@ class AuthHeader extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          AppAssets.branding,
-          height: context.height * 0.18,
+          AppAssets.splash,
+          width: 120,
+          height: 120,
           fit: BoxFit.contain,
         ),
         const SizedBox(height: 24),

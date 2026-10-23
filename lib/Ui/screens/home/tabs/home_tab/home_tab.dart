@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubit/home/home_cubit.dart';
+import 'package:movies_app/l10n/app_localizations.dart';
 
 import '../../../../../cubit/home/featured_carousel_cubit.dart';
 import '../../../../../utils/app_assets.dart';
@@ -41,6 +43,7 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     final width = context.width;
     final height = context.height;
+    final l10n = AppLocalizations.of(context)!;
 
     return BlocProvider(
       create: (_) => FeaturedCarouselCubit(),
@@ -85,8 +88,8 @@ class _HomeTabState extends State<HomeTab> {
                       Center(
                         child: Image.asset(
                           AppAssets.availableNow,
-                          width: width * .62,
-                          height: height * .1,
+                          width: width * .82,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       SizedBox(height: height * .02),
@@ -111,8 +114,8 @@ class _HomeTabState extends State<HomeTab> {
                       Center(
                         child: Image.asset(
                           AppAssets.watchNow,
-                          width: width * .82,
-                          height: height * .157,
+                          width: width * .9,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       Padding(
@@ -122,28 +125,31 @@ class _HomeTabState extends State<HomeTab> {
                           width * .065,
                           height * .015,
                         ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Action',
-                              style: AppStyles.regularDynamicWhite.copyWith(
-                                fontSize: width * .047,
+                        child: InkWell(
+                          onTap: () => context.read<HomeCubit>().selectTab(2),
+                          child: Row(
+                            children: [
+                              Text(
+                                l10n.homeActionGenre,
+                                style: AppStyles.regularDynamicWhite.copyWith(
+                                  fontSize: width * .047,
+                                ),
                               ),
-                            ),
-                            const Spacer(),
-                            Text(
-                              'See More',
-                              style: AppStyles.regularDynamicPrimary.copyWith(
-                                fontSize: width * .037,
+                              const Spacer(),
+                              Text(
+                                l10n.homeSeeMore,
+                                style: AppStyles.regularDynamicPrimary.copyWith(
+                                  fontSize: width * .037,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: width * .015),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.primaryColor,
-                              size: width * .018,
-                            ),
-                          ],
+                              SizedBox(width: width * .015),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: AppColors.primaryColor,
+                                size: width * .018,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

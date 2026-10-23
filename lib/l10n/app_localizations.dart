@@ -577,6 +577,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get authErrorUnexpected;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// No description provided for @languageArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get languageArabic;
+
+  /// No description provided for @onboardingHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Your Next\nFavorite Movie Here'**
+  String get onboardingHeroTitle;
+
+  /// No description provided for @onboardingHeroDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Get access to a huge library of movies\nto suit all tastes. You will surely like it.'**
+  String get onboardingHeroDescription;
+
+  /// No description provided for @onboardingDiscoverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover Movies'**
+  String get onboardingDiscoverTitle;
+
+  /// No description provided for @onboardingDiscoverDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.'**
+  String get onboardingDiscoverDescription;
+
+  /// No description provided for @onboardingGenresTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore All Genres'**
+  String get onboardingGenresTitle;
+
+  /// No description provided for @onboardingGenresDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.'**
+  String get onboardingGenresDescription;
+
+  /// No description provided for @onboardingWatchlistsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Watchlists'**
+  String get onboardingWatchlistsTitle;
+
+  /// No description provided for @onboardingWatchlistsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.'**
+  String get onboardingWatchlistsDescription;
+
+  /// No description provided for @onboardingRateReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate, Review, and Learn'**
+  String get onboardingRateReviewTitle;
+
+  /// No description provided for @onboardingRateReviewDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews.'**
+  String get onboardingRateReviewDescription;
+
+  /// No description provided for @onboardingStartWatchingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Watching Now'**
+  String get onboardingStartWatchingTitle;
+
+  /// No description provided for @onboardingExplore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Now'**
+  String get onboardingExplore;
+
+  /// No description provided for @onboardingFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get onboardingFinish;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get onboardingBack;
+
+  /// No description provided for @homeAvailableNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Now'**
+  String get homeAvailableNow;
+
+  /// No description provided for @homeWatchNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Now'**
+  String get homeWatchNow;
+
+  /// No description provided for @homeActionGenre.
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get homeActionGenre;
+
+  /// No description provided for @homeSeeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See More'**
+  String get homeSeeMore;
 }
 
 class _AppLocalizationsDelegate

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/Ui/auth/auth_service.dart';
-import 'package:movies_app/Ui/auth/cubits/auth_cubit.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_service.dart';
+import 'package:movies_app/cubit/auth_cubit/auth_cubit.dart';
 
 /// Wires the authentication service and the session cubit of the application.
 ///

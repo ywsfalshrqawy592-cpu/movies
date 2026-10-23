@@ -35,29 +35,12 @@ Firebase، طريقة الاختبار، والقيود المعروفة.
 التركيب هو `AuthScope` كما في `LanguageCubit` داخل `main.dart`.
 
 ```
-lib/Ui/
-├── auth/
-│   ├── auth_scope.dart                  # يوفّر AuthCubit (وخدمة Firebase)
-│   ├── auth_service.dart                # كل نداءات FirebaseAuth وتحويل الأخطاء
-│   ├── auth_failure.dart                # أنواع الأخطاء + تحويل أكواد Firebase
-│   ├── auth_user.dart                   # نموذج المستخدم المعروض في الواجهة
-│   ├── auth_validators.dart             # البريد وكلمة المرور والاسم والهاتف
-│   ├── auth_messages.dart               # تحويل الأخطاء إلى نصوص مترجمة
-│   └── cubits/
-│       ├── auth_cubit.dart              # الجلسة + service للشاشات
-│       ├── login_cubit.dart
-│       ├── register_cubit.dart
-│       ├── forgot_password_cubit.dart
-│       ├── new_password_cubit.dart
-│       ├── email_verification_cubit.dart
-│       ├── update_profile_cubit.dart
-│       └── delete_account_cubit.dart
-├── screens/
-│   ├── auth/                            # AuthGate, Login, Register,
-│   │                                    # EmailVerification, NewPassword, Loading
-│   ├── reset_password/                  # طلب رابط إعادة التعيين
-│   └── update_profile/                  # تعديل بيانات الملف الشخصي
-└── widgets/auth/                        # عناصر مشتركة لشاشات المصادقة
+lib/
+├── Ui/widgets/auth/                     # خدمة Firebase، النماذج والتحقق والرسائل
+├── cubit/auth_cubit/                    # حالة الجلسة وتدفقات المصادقة
+├── Ui/screens/auth/                     # Login, Register, ResetPassword,
+│                                        # UpdateProfile
+└── Ui/screens/home/                     # الصفحة الرئيسية وتبويباتها
 ```
 
 - `AuthService` هو المكان الوحيد الذي يعرف أنواع Firebase وأكواد أخطائه.
@@ -66,17 +49,17 @@ lib/Ui/
   خلال `context.read<AuthCubit>().service`.
 - `AuthScope` يقبل `service` اختياريًا حتى تستطيع اختبارات الـ widget استخدام
   خدمة وهمية بدون مشروع Firebase.
-- لا توجد تبعيات جديدة أُضيفت لهذا العمل.
+- اعتمادات المشروع موضحة في `pubspec.yaml`، وتشمل Firebase Auth وFlutter
+  localization من Flutter SDK.
 
 ### المصادر المشتركة في بقية المشروع
 
-- `lib/main.dart`: `Firebase.initializeApp` + تسجيل المسارات الجديدة، بما فيها
-  مسار `new_password_screen` الذي يستقبل `oobCode` من نوع `String`.
+- `lib/main.dart`: تهيئة Firebase وتسجيل المسارات الرئيسية.
 - `lib/utils/app_routes.dart`: أسماء المسارات (`registerRouteName`,
-  `forgotPasswordRouteName`, `newPasswordRouteName`, `updateProfileRouteName`).
-- `lib/Ui/screens/reset_password/reset_password_screen.dart`: طلب رابط إعادة
+  `forgotPasswordRouteName`, `updateProfileRouteName`).
+- `lib/Ui/screens/auth/reset_password/reset_password_screen.dart`: طلب رابط إعادة
   التعيين عبر `ForgotPasswordCubit`.
-- `lib/Ui/screens/update_profile/update_profile_screen.dart`: تعديل البيانات،
+- `lib/Ui/screens/auth/update_profile/update_profile_screen.dart`: تعديل البيانات،
   وإعادة تعيين كلمة المرور، وحذف الحساب.
 - `lib/Ui/screens/home/home_screen.dart`: أيقونتا الملف الشخصي وتسجيل الخروج.
 - `lib/utils/app_prefs.dart`: تخزين رقم الهاتف محليًا (`profile_phone`).
@@ -125,7 +108,7 @@ lib/Ui/
   المزود ويعيد القيمة `true` / `false` / `null` (تعذر الاتصال)، فلا يمكن تأكيد
   البريد محليًا أبدًا.
 
-### 3.5 نسيت كلمة المرور وتعيين كلمة مرور جديدة
+### 3.5 نسيت كلمة المرور
 
 طلب الرابط:
 
@@ -135,28 +118,28 @@ lib/Ui/
    التعيين" — حتى لا تُستغل الشاشة لمعرفة الحسابات المسجلة.
 4. أخطاء الإرسال (شبكة، طلبات كثيرة، مزود غير مفعّل) تظهر برسالة مترجمة، ويمكن
    إعادة المحاولة.
+5. تظهر رسالة تأكيد، ويعود المستخدم للشاشة السابقة بسهم الرجوع.
+6. رابط البريد يفتح صفحة Firebase المستضافة، وهناك يحدد المستخدم كلمة المرور
+   الجديدة ثم يرجع للتطبيق لتسجيل الدخول بها. لا توجد شاشة داخل التطبيق لإتمام
+   تعيين كلمة المرور حاليًا.
 
-تعيين كلمة المرور:
+### 3.6 التنقل بين الشاشات
 
-1. يصل رمز الرابط (`oobCode`) إلى `NewPasswordScreen` عبر
-   `AppRoutes.newPasswordRouteName`.
-2. `NewPasswordCubit` يتحقق من الرمز بـ `verifyPasswordResetCode` قبل إظهار
-   النموذج. الرمز المنتهي أو المستخدم أو غير الصالح يعرض رسالة واضحة وزر
-   "طلب رابط جديد" بدون نموذج.
-3. بعد التحقق، يظهر البريد المرتبط وحقلا كلمة المرور الجديدة وتأكيدها، مع نفس
-   سياسة كلمة المرور المستخدمة في التسجيل.
-4. عند الحفظ يستدعي `confirmPasswordReset`، ثم يعرض رسالة نجاح وزر العودة لتسجيل
-   الدخول.
-5. فشل الحفظ (مثل انقطاع الشبكة) يبقي النموذج ظاهرًا مع رسالة خطأ قابلة لإعادة
-   المحاولة، ولا يعرض الرمز كمنتهٍ.
+- أول تشغيل: `OnboardingTabs` → `AuthGate` → شاشة الدخول أو الوجهة المناسبة
+  حسب حالة الجلسة.
+- شاشة الدخول تفتح التسجيل أو طلب رابط إعادة التعيين. الرجوع من أي منهما يعيد
+  المستخدم إلى الشاشة السابقة.
+- التسجيل الناجح يرجع إلى `AuthGate`، الذي يعرض تأكيد البريد. بعد التحقق ينتقل
+  تلقائيًا إلى `HomeScreen`، وزر استخدام حساب آخر يعيد المستخدم للدخول.
+- شريط التنقل يبدّل بين تبويبات الرئيسية والبحث والاستكشاف والملف الشخصي.
+  رابط «شاهد المزيد» يفتح تبويب الاستكشاف.
+- تبويب الملف الشخصي وأيقونة الملف في الشريط العلوي يفتحان تعديل الملف. الحفظ
+  يرجع إلى الصفحة السابقة، وإعادة تعيين كلمة المرور ترسل المستخدم إلى شاشة
+  طلب الرابط. حذف الحساب ينهي الجلسة ويعيده للدخول.
+- رابط إعادة التعيين يُكمل العملية في صفحة Firebase المستضافة؛ سهم الرجوع في
+  شاشة الطلب يعيد المستخدم إلى الصفحة التي بدأ منها.
 
-> **تحديد مهم:** رابط البريد يستخدم صفحة Firebase المستضافة افتراضيًا. شاشة
-> `NewPasswordScreen` جاهزة لاستقبال `oobCode`، لكن فتحها تلقائيًا من البريد
-> يحتاج ضبط Action link / deep link في Firebase Console وإعداد Android App
-> Links وiOS Universal Links. هذا الإعداد لم يُنفَّذ في هذه البيئة، لذلك الرابط
-> الحالي يفتح صفحة Firebase في المتصفح.
-
-### 3.6 تعديل بيانات الملف الشخصي
+### 3.7 تعديل بيانات الملف الشخصي
 
 1. الشاشة تُعبَّأ بالاسم والصورة من ملف Firebase، ورقم الهاتف من `AppPrefs`.
 2. التحقق المحلي من الاسم (غير فارغ) والهاتف (اختياري، ولكن إذا أُدخل يجب أن
@@ -215,11 +198,8 @@ lib/Ui/
      "Something went wrong".
 2. **إضافة النطاقات المصرح بها** إذا سيعمل التطبيق على الويب:
    Authentication → Settings → Authorized domains.
-3. **ضبط Action link / deep link** إذا أردنا أن يفتح رابط البريد شاشة
-   `NewPasswordScreen` داخل التطبيق بدل صفحة Firebase المستضافة. يتطلب ذلك
-   Custom action URL في Firebase Console، بالإضافة إلى Android App Links
-   وiOS Universal Links، ثم تمرير `oobCode` إلى المسار
-   `AppRoutes.newPasswordRouteName`.
+3. **فتح رابط إعادة التعيين داخل التطبيق اختياري**: يتطلب تصميم شاشة جديدة
+   وإعداد Action link في Firebase مع Android App Links وiOS Universal Links.
 4. **توليد قيم Web / Windows / Linux** (مفقودة حاليًا):
    ```
    flutterfire configure --project=movies-app-3cb31 --platforms=android,ios,macos,web,windows
@@ -253,17 +233,9 @@ lib/Ui/
 
 | الملف | التغطية |
 | ----- | ------- |
-| `test/features/auth/domain/auth_validators_test.dart` | سياسة البريد وكلمة المرور والاسم والهاتف |
-| `test/features/auth/data/auth_failure_test.dart` | تحويل أكواد Firebase إلى `AuthFailure` وعدم كشف وجود الحساب |
-| `test/features/auth/presentation/cubits/*_test.dart` | 8 cubits (الجلسة، الدخول، التسجيل، نسيت كلمة المرور، كلمة المرور الجديدة، تأكيد البريد، تعديل الملف، حذف الحساب) |
-| `test/features/auth/presentation/screens/*_test.dart` | 6 شاشات، بما فيها تعديل الملف وكلمة المرور الجديدة |
-| `test/features/auth/presentation/helpers/auth_messages_test.dart` | نصوص الرسائل من الترجمة المولدة |
-| `test/features/auth/integration/auth_flow_test.dart` | التدفق الكامل: جلسة، دخول، تأكيد، خروج، حذف، عربية/RTL |
-| `test/widget_test.dart` | فتح التطبيق كاملًا على خدمة وهمية |
+| `test/auth_validators_test.dart` | اختبار أساسي لصيغة البريد وكلمة المرور |
 
-- الاختبارات تستهلك `FakeAuthService` الموجود في
-  `test/features/auth/fakes/fake_auth_service.dart` ولا تتصل بـ Firebase
-  إطلاقًا، ولذلك تعمل بدون مشروع أو emulator.
+الاختبارات الحالية صغيرة ومباشرة، ولا تحتاج Firebase أو emulator.
 - الأوامر:
   ```
   flutter pub get
@@ -277,17 +249,16 @@ lib/Ui/
   flutter run -d <device-id>
   ```
 
-آخر نتيجة محلية: `flutter test` نجح بالكامل (121 اختبارًا)، و`flutter analyze`
-لا يعرض إلا 3 ملاحظات معلوماتية سابقة في ملفات الفريق.
+سجل التدقيق السابق يوثق نجاح 121 اختبارًا في وقت إعداده. تغيّر مسار ملفات
+المصادقة بعد ذلك؛ أعد تشغيل `flutter test` للتحقق من الحالة الحالية قبل الدمج.
 
 ## 7. القيود والحالات غير المكتملة
 
 1. **Web / Windows / Linux غير مدعومة** حاليًا لأن قيم `apiKey` الخاصة بالويب
    غير متاحة في المستودع، ولأن حساب Firebase CLI الحالي لا يملك صلاحية على
    المشروع. الحل موثق في 4.2 (بند 4).
-2. **فتح رابط إعادة التعيين داخل التطبيق غير مُفعَّل**: رابط البريد يفتح صفحة
-   Firebase المستضافة. شاشة `NewPasswordScreen` ومسارها جاهزان لرمز `oobCode`،
-   لكن deep link / Action link لم يُضبط. راجع 4.2 (بند 3).
+2. **تعيين كلمة المرور يتم خارج التطبيق**: رابط البريد يفتح صفحة Firebase
+   المستضافة؛ لا توجد شاشة تعيين كلمة مرور داخل التطبيق حاليًا.
 3. **الهاتف محلي فقط** ولا تتم مزامنته، ولا يوجد تخزين سحابي للملف الشخصي.
 4. **اختبار Firebase الحقيقي والبريد والجهاز لم يُنفَّذ**: خدمة Authentication
    غير مفعّلة على المشروع (`CONFIGURATION_NOT_FOUND`)، ولا تتوفر صلاحية Firebase
@@ -301,10 +272,9 @@ lib/Ui/
 ## 8. خطوات يدوية للمراجعة قبل الدمج
 
 - [ ] تفعيل Email/Password في Firebase Console (بند 4.2.1).
-- [ ] تجربة يدوية على Android: تسجيل حساب جديد → تأكيد البريد → دخول → تعديل
-      الملف الشخصي → خروج → نسيت كلمة المرور → فتح الرابط → كلمة مرور جديدة →
-      دخول بالكلمة الجديدة → حذف الحساب.
-- [ ] اختبار رابط منتهٍ أو مستخدم مرة أخرى، وفشل الشبكة أثناء إرسال الرابط
-      وأثناء حفظ كلمة المرور الجديدة.
-- [ ] ضبط deep link / Action link إذا كان مطلوبًا فتح شاشة التطبيق من البريد.
+- [ ] تجربة يدوية على Android: onboarding → تسجيل حساب → تأكيد البريد → دخول
+      → التنقل بين التبويبات → تعديل الملف → خروج → نسيت كلمة المرور → تعيينها
+      من صفحة Firebase → دخول بالكلمة الجديدة.
+- [ ] اختبار فشل الشبكة أثناء إرسال رابط إعادة التعيين.
+- [ ] إعداد deep link إذا تقرر إضافة شاشة إعادة تعيين داخل التطبيق لاحقًا.
 - [ ] مراجعة مفاتيح الترجمة الجديدة في `app_en.arb` / `app_ar.arb`.

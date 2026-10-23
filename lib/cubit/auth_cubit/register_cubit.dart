@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/Ui/auth/auth_failure.dart';
-import 'package:movies_app/Ui/auth/auth_service.dart';
-import 'package:movies_app/Ui/auth/auth_user.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_failure.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_service.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_user.dart';
 
 /// Status of the registration form.
 enum RegisterStatus { idle, submitting, success, failure }
@@ -35,6 +35,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String name,
     required String email,
     required String password,
+    String? avatarPath,
   }) async {
     if (state.isSubmitting) return;
     emit(const RegisterState(status: RegisterStatus.submitting));
@@ -43,6 +44,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         name: name,
         email: email,
         password: password,
+        photoUrl: avatarPath,
       );
       emit(RegisterState(status: RegisterStatus.success, user: user));
     } on AuthFailure catch (failure) {

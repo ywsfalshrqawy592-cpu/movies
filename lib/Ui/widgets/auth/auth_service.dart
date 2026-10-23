@@ -37,6 +37,7 @@ class AuthService {
     required String name,
     required String email,
     required String password,
+    String? photoUrl,
   }) => _guard(() async {
     final credential = await _auth.createUserWithEmailAndPassword(
       email: AuthValidators.normalizeEmail(email),
@@ -47,6 +48,7 @@ class AuthService {
       throw const AuthFailure(AuthFailureType.unknown, cause: 'user-missing');
     }
     await user.updateDisplayName(name.trim());
+    if (photoUrl != null) await user.updatePhotoURL(photoUrl);
     await user.sendEmailVerification();
     await user.reload();
     return _requireUser(_auth.currentUser);

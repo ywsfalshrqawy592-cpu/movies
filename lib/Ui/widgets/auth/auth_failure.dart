@@ -45,11 +45,14 @@ AuthFailureType authFailureTypeFromCode(
   bool isActionCode = false,
   String? message,
 }) {
-  if (code == 'internal-error' &&
-      (message?.contains('CONFIGURATION_NOT_FOUND') ?? false)) {
+  final normalizedCode = code.trim().toLowerCase().replaceAll('_', '-');
+  final normalizedMessage = (message ?? '').toLowerCase().replaceAll('_', '-');
+
+  if (normalizedCode.contains('configuration-not-found') ||
+      normalizedMessage.contains('configuration-not-found')) {
     return AuthFailureType.operationNotAllowed;
   }
-  return switch (code) {
+  return switch (normalizedCode) {
     'invalid-email' => AuthFailureType.invalidEmail,
     'weak-password' => AuthFailureType.weakPassword,
     'email-already-in-use' => AuthFailureType.emailAlreadyInUse,

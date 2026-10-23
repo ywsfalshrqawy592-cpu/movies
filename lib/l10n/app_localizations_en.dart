@@ -271,4 +271,72 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authErrorUnexpected => 'Something went wrong. Please try again.';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageArabic => 'Arabic';
+
+  @override
+  String get onboardingHeroTitle => 'Find Your Next\nFavorite Movie Here';
+
+  @override
+  String get onboardingHeroDescription =>
+      'Get access to a huge library of movies\nto suit all tastes. You will surely like it.';
+
+  @override
+  String get onboardingDiscoverTitle => 'Discover Movies';
+
+  @override
+  String get onboardingDiscoverDescription =>
+      'Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.';
+
+  @override
+  String get onboardingGenresTitle => 'Explore All Genres';
+
+  @override
+  String get onboardingGenresDescription =>
+      'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.';
+
+  @override
+  String get onboardingWatchlistsTitle => 'Create Watchlists';
+
+  @override
+  String get onboardingWatchlistsDescription =>
+      'Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.';
+
+  @override
+  String get onboardingRateReviewTitle => 'Rate, Review, and Learn';
+
+  @override
+  String get onboardingRateReviewDescription =>
+      'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews.';
+
+  @override
+  String get onboardingStartWatchingTitle => 'Start Watching Now';
+
+  @override
+  String get onboardingExplore => 'Explore Now';
+
+  @override
+  String get onboardingFinish => 'Finish';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingBack => 'Back';
+
+  @override
+  String get homeAvailableNow => 'Available Now';
+
+  @override
+  String get homeWatchNow => 'Watch Now';
+
+  @override
+  String get homeActionGenre => 'Action';
+
+  @override
+  String get homeSeeMore => 'See More';
 }

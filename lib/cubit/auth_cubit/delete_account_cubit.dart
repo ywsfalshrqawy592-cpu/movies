@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/Ui/auth/auth_failure.dart';
-import 'package:movies_app/Ui/auth/auth_service.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_failure.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_service.dart';
 
 /// Status of the "delete account" request.
 enum DeleteAccountStatus { idle, submitting, success, failure }

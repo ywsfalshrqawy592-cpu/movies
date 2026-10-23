@@ -53,7 +53,6 @@ class CustomTextField extends StatelessWidget {
     this.obscuringCharacter,
     this.filled,
     this.fillColor,
-    KeybordTtype,
   });
 
   @override

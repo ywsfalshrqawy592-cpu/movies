@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/Ui/screens/home/home_screen.dart';
 
-import 'package:movies_app/Ui/auth/cubits/auth_cubit.dart';
-import 'package:movies_app/Ui/screens/auth/auth_loading_screen.dart';
-import 'package:movies_app/Ui/screens/auth/email_verification_screen.dart';
-import 'package:movies_app/Ui/screens/auth/login_screen.dart';
+import 'package:movies_app/cubit/auth_cubit/auth_cubit.dart';
+import 'package:movies_app/Ui/widgets/auth/auth_loading_screen.dart';
+import 'package:movies_app/Ui/widgets/auth/email_verification_screen.dart';
+import 'package:movies_app/Ui/screens/auth/login/login_screen.dart';
 
 /// Root of the authenticated area of the app.
 ///

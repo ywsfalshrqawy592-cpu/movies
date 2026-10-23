@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/Ui/widgets/language_switch.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 
@@ -42,12 +43,19 @@ class AuthPageScaffold extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minHeight: constraints.maxHeight - 40,
+                minHeight: (constraints.maxHeight - 40).clamp(
+                  0.0,
+                  double.infinity,
+                ),
               ),
               child: child,
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: SizedBox(height: 56, child: Center(child: LanguageSwitch())),
       ),
     );
   }

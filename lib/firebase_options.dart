@@ -6,13 +6,9 @@
 //   * ios/Runner/GoogleService-Info.plist
 //   * macos/Runner/GoogleService-Info.plist
 //
-// The Web configuration (apiKey / authDomain / measurementId) is not present in
-// the repository yet, so Web / Windows / Linux are reported as unsupported until
-// somebody with access to the Firebase project runs:
-//
-//   flutterfire configure --project=movies-app-3cb31 --platforms=android,ios,macos,web,windows
-//
-// That command regenerates this file with the missing values.
+// Only Android, iOS and macOS are configured in this project. Web, Windows and
+// Linux remain unsupported until somebody with access to Firebase configures
+// those targets and regenerates this file with the FlutterFire CLI.
 //
 // ignore_for_file: type=lint
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
