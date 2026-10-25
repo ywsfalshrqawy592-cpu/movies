@@ -14,6 +14,8 @@ import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 import 'package:movies_app/utils/app_routes.dart';
 
+import 'Ui/screens/movies_Screen/movie_details_screen.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPrefs.init();
@@ -51,6 +53,8 @@ class MyApp extends StatelessWidget {
               const ResetPasswordScreen(),
           AppRoutes.updateProfileRouteName: (context) =>
               const UpdateProfileScreen(),
+          AppRoutes.movieDetailsRouteName : (context) =>
+              const MovieDetailsScreen(),
         },
       ),
     );
