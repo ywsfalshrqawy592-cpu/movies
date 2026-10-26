@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
         locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        initialRoute: AppPrefs.onboardingSeen
+        initialRoute:
+        AppPrefs.onboardingSeen
             ? AppRoutes.homeRouteName
             : AppRoutes.onBoardingRouteName,
         routes: {
