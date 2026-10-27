@@ -7,6 +7,7 @@ import 'package:movies_app/Ui/auth/auth_scope.dart';
 import 'package:movies_app/Ui/screens/auth/auth_gate.dart';
 import 'package:movies_app/Ui/screens/auth/new_password_screen.dart';
 import 'package:movies_app/Ui/screens/auth/register_screen.dart';
+import 'package:movies_app/Ui/screens/movie_details/movie_details_screen.dart';
 import 'package:movies_app/Ui/screens/reset_password/reset_password_screen.dart';
 import 'package:movies_app/Ui/screens/update_profile/update_profile_screen.dart';
 import 'package:movies_app/firebase_options.dart';
@@ -57,6 +58,8 @@ class MyApp extends StatelessWidget {
                 const ResetPasswordScreen(),
             AppRoutes.updateProfileRouteName: (context) =>
                 const UpdateProfileScreen(),
+            AppRoutes.movieDetailsRouteName: (context) =>
+                const MovieDetailsScreen(),
           },
           onGenerateRoute: (settings) {
             if (settings.name == AppRoutes.newPasswordRouteName) {

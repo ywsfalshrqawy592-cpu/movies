@@ -15,4 +15,7 @@ class AppRoutes {
 
   /// Profile screen of the signed-in user.
   static const String updateProfileRouteName = "update_profile_screen";
+
+  /// Movie details screen.
+  static const String movieDetailsRouteName = "movie_details_screen";
 }
