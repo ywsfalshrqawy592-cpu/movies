@@ -115,7 +115,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: BlocBuilder<SuggestionsViewModel, SuggestionsStats>(
                   builder: (context, state) {
                     if (state is MovieSuggestionsSuccess) {
-                      var movie = state.movies;
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: width * .02),
                         child: Column(
@@ -130,10 +129,28 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 );
                               },
                             ),
-                            MovieSummary(
-                              summary: movie.first.descriptionFull ?? "",
+
+                            BlocBuilder<DetailsViewModel, DetailsStats>(
+                              bloc: detailsViewModel,
+                              builder: (context, detailsState) {
+                                if (detailsState is! MovieDetailsSuccess) {
+                                  return const SizedBox.shrink();
+                                }
+                                final currentMovie = detailsState.movie.movie;
+                                return Column(
+                                  children: [
+                                    MovieSummary(
+                                      summary: currentMovie?.descriptionFull ??
+                                          currentMovie?.descriptionIntro ??
+                                          "",
+                                    ),
+                                    MovieGenres(
+                                      genres: currentMovie?.genres ?? const [],
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
-                            MovieGenres(genres: movie.first.genres ?? []),
                             SizedBox(height: height * .01),
                           ],
                         ),
