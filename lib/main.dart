@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/Ui/OnBoarding/on_boarding_tabs.dart';
+import 'package:movies_app/Ui/screens/movie_details/details_screen.dart';
 import 'package:movies_app/Ui/widgets/auth/auth_scope.dart';
 import 'package:movies_app/Ui/screens/auth/reset_password/reset_password_screen.dart';
 import 'package:movies_app/Ui/screens/auth/update_profile/update_profile_screen.dart';
@@ -15,6 +16,7 @@ import 'package:movies_app/utils/app_prefs.dart';
 import 'package:movies_app/utils/app_routes.dart';
 
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await AppPrefs.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
               const ResetPasswordScreen(),
           AppRoutes.updateProfileRouteName: (context) =>
               const UpdateProfileScreen(),
+          AppRoutes.detailsRouteName: (context) =>  DetailsScreen(),
+
         },
       ),
     );

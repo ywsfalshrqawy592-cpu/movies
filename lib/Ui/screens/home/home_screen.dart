@@ -13,7 +13,7 @@ import 'home_bottom_navbar.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const _tabs = [HomeTab(), SearchTab(), BrowsingTab(), ProfileTab()];
+  static final _tabs = [HomeTab(), const SearchTab(), const BrowsingTab(), const ProfileTab()];
 
   @override
   Widget build(BuildContext context) {

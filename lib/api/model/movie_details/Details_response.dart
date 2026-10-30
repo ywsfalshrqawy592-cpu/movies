@@ -1,6 +1,6 @@
 import '@meta.dart';
 
-import 'Data.dart';
+import 'movie_details_data.dart';
 
 class DetailsResponse {
   DetailsResponse({
@@ -16,7 +16,7 @@ class DetailsResponse {
     status = json['status'];
     statusMessage = json['status_message'];
 
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? MovieDetailsData.fromJson(json['data']) : null;
 
     meta = json['@meta'] != null ? Meta.fromJson(json['@meta']) : null;
   }
@@ -24,7 +24,7 @@ class DetailsResponse {
   String? error;
   String? status;
   String? statusMessage;
-  Data? data;
+  MovieDetailsData? data;
   Meta? meta;
 
   Map<String, dynamic> toJson() {

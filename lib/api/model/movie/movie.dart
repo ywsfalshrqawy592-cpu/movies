@@ -16,7 +16,7 @@ class Movie {
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
       mediumCoverImage: json['medium_cover_image'] ?? '',
-      rating: json['rating'] ?? 0.0,
+      rating: json['rating']?.toDouble() ?? 0.0,
     );
   }
 }

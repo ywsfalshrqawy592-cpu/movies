@@ -1,5 +1,5 @@
 import '../movie_details/@meta.dart';
-import 'Data.dart';
+import 'movie_suggestions_data.dart';
 
 
 /// status : "ok"
@@ -20,13 +20,13 @@ class MovieSuggestions {
     status = json['status'];
 
     statusMessage = json['status_message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? MovieSuggestionsData.fromJson(json['data']) : null;
     meta = json['@meta'] != null ? Meta.fromJson(json['@meta']) : null;
   }
   // String? error;
   String? status;
   String? statusMessage;
-  Data? data;
+  MovieSuggestionsData? data;
   Meta? meta;
 
   Map<String, dynamic> toJson() {
