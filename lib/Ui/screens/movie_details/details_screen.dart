@@ -15,6 +15,7 @@ import '../../widgets/customLoadingWidget.dart';
 import '../home/tabs/home_tab/widget/movie_gradient.dart';
 import 'cubit/details_stats.dart';
 import 'cubit/details_view_model.dart';
+import 'movies_web_view.dart';
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({super.key});
@@ -87,7 +88,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                               MovieDetailsContent(
                                 details: details,
-                                onPressedWatch: () {},
+                                onPressedWatch: () {
+
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return MoviesWebView(movieDetails:details,);
+
+                                  },));
+
+                                },
                               ),
                             ],
                           ),
