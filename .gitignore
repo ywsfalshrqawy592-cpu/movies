@@ -46,3 +46,5 @@ app.*.map.json
 
 # Local pub package downloads used for offline installs
 /temp/
+# Widget Preview related
+.widget_preview/

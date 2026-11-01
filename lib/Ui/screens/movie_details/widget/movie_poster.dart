@@ -18,7 +18,7 @@ class MoviePoster extends StatelessWidget {
         height: 645,
         fit: BoxFit.cover,
         placeholder: (context, url) => const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(color: Colors.yellow,),
         ),
         errorWidget: (context, url, error) => const Icon(
           Icons.error,

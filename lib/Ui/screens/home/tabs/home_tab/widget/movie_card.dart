@@ -38,7 +38,7 @@ class MovieCard extends StatelessWidget {
                 imageUrl: imagePath,
                 fit: BoxFit.fill,
                 placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
+                  child: CircularProgressIndicator(color: Colors.yellow),
                 ),
                 errorWidget: (context, url, error) =>
                     const Icon(Icons.error, color: Colors.white),

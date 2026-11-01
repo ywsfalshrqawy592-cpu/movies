@@ -49,7 +49,7 @@ class _HomeTabState extends State<HomeTab> {
                         movies[_currentCarouselIndex].mediumCoverImage ?? '',
                     fit: BoxFit.cover,
                     placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
+                        const Center(child: CircularProgressIndicator(color: Colors.yellow,)),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error, color: Colors.white),
                   ),

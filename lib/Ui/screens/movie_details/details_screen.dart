@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/Ui/screens/movie_details/widget/cast_section.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_details_actions.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_details_content.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_genres.dart';
@@ -9,6 +11,7 @@ import 'package:movies_app/Ui/screens/movie_details/widget/similar_movies.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import '../../../utils/app_routes.dart';
+import '../../../utils/app_styles.dart';
 import '../../../utils/size_utils.dart';
 import '../../widgets/customErrorWidget.dart';
 import '../../widgets/customLoadingWidget.dart';
@@ -47,7 +50,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              BlocProvider(create: (context) => detailsViewModel..getMovieDetailsBySourceId(sourceId: moviesId),
+              BlocProvider(
+                create: (context) =>
+                    detailsViewModel
+                      ..getMovieDetailsBySourceId(sourceId: moviesId),
                 child: BlocBuilder<DetailsViewModel, DetailsStats>(
                   builder: (context, state) {
                     if (state is MovieDetailsSuccess) {
@@ -89,13 +95,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               MovieDetailsContent(
                                 details: details,
                                 onPressedWatch: () {
-
-                                  Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) {
-                                      return MoviesWebView(movieDetails:details,);
-
-                                  },));
-
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return MoviesWebView(
+                                          movieDetails: details,
+                                        );
+                                      },
+                                    ),
+                                  );
                                 },
                               ),
                             ],
@@ -119,8 +128,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
               SizedBox(height: height * .016),
               BlocProvider(
-                create: (context) =>
-                    suggestionsViewModel..getMovieSuggestions(sourceId: moviesId),
+                create: (context) => suggestionsViewModel..getMovieSuggestions(sourceId: moviesId),
                 child: BlocBuilder<SuggestionsViewModel, SuggestionsStats>(
                   builder: (context, state) {
                     if (state is MovieSuggestionsSuccess) {
@@ -130,7 +138,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Column(
                           children: [
                             SimilarMovies(
-                              movies: state.movies,
+                              movies: movie,
                               onMovieTap: (movie) {
                                 Navigator.pushNamed(
                                   context,
@@ -139,16 +147,45 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 );
                               },
                             ),
-                            MovieSummary(
-                              summary: movie.first.descriptionFull ?? "",
+
+                            BlocProvider.value(
+                              value: detailsViewModel,
+                              child:
+                                  BlocBuilder<DetailsViewModel, DetailsStats>(
+                                    builder: (context, detailsState) {
+                                      if (detailsState is MovieDetailsSuccess) {
+                                        final details = detailsState.movie.movie!;
+                                        return Column(
+                                          children: [
+                                            MovieSummary(
+                                              summary:
+                                                  details.descriptionFull ?? "",
+                                            ),
+
+                                            SizedBox(height: height * .016),
+                                            CastSection(
+                                              cast: details.cast ?? [],
+                                              width: width,
+                                              height: height,
+                                            ),
+                                            MovieGenres(
+                                              genres: details.genres ?? [],
+                                            ),
+
+                                            SizedBox(height: height * .01),
+                                          ],
+                                        );
+                                      }
+
+                                      return CustomLoadingWidget();
+                                    },
+                                  ),
                             ),
-                            MovieGenres(genres: movie.first.genres ?? []),
-                            SizedBox(height: height * .01),
                           ],
                         ),
                       );
                     }
-      
+
                     if (state is MovieSuggestionsError) {
                       return CustomErrorWidget(
                         error: state.errorMessage,
@@ -159,7 +196,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         },
                       );
                     }
-      
+
                     return CustomLoadingWidget();
                   },
                 ),

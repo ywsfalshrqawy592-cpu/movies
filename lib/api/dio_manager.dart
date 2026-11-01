@@ -6,7 +6,6 @@ import 'api_error_handler/api_error_handler.dart';
 import 'model/ movie_suggestions/Movie_suggestions.dart';
 import 'model/movie/Movies.dart';
 import 'model/movie/Movies_list_model.dart';
-import 'model/movie/movie.dart';
 import 'model/movie_details/Details_response.dart';
 import 'start_point_constants/api_constants.dart';
 import 'start_point_constants/api_end_points.dart';
@@ -45,7 +44,11 @@ class DioManager {
     try {
       var detailsResponse = await dio.get(
         ApiConstants.movieDetails,
-        queryParameters: {"movie_id": sourceId},
+        queryParameters: {
+          "movie_id": sourceId,
+          "with_images": true,
+          "with_cast": true,
+        },
       );
       return DetailsResponse.fromJson(detailsResponse.data);
     } on DioException catch (e) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
-
 import '../../../../api/model/movie_details/movie_details.dart';
 import '../../../widgets/custom_elevated_botton.dart';
 import 'movie_info_row.dart';
@@ -19,6 +18,7 @@ class MovieDetailsContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
 
@@ -54,10 +54,7 @@ class MovieDetailsContent extends StatelessWidget {
             rating: '${details.rating ?? 0}',
           ),
           MovieScreenshots(
-            backgroundImageOriginal:
-            details.backgroundImageOriginal ?? '',
-            backgroundImage: details.backgroundImage ?? '',
-          ),
+            movieScreenshots:details)
         ],
       ),
     );
