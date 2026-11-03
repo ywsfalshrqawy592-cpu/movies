@@ -47,6 +47,16 @@ class WatchListCubit extends Cubit<WatchListState> {
     }
   }
 
+  Future<void> add(SavedMovie movie) async {
+    final uid = _uid;
+    if (uid == null) return;
+    try {
+      await _service.add(uid, movie);
+    } catch (e) {
+      emit(WatchListState(movies: state.movies, errorMessage: e.toString()));
+    }
+  }
+
   @override
   Future<void> close() {
     _userSubscription.cancel();

@@ -6,6 +6,7 @@ import 'package:movies_app/Ui/screens/movie_details/widget/movie_genres.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_poster.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_summary.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/similar_movies.dart';
+import 'package:movies_app/cubit/watch_list/history_cubit.dart';
 import 'package:movies_app/cubit/watch_list/saved_movie.dart';
 import 'package:movies_app/cubit/watch_list/watch_list_cubit.dart';
 import 'package:movies_app/cubit/watch_list/watch_list_state.dart';
@@ -57,6 +58,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   builder: (context, state) {
                     if (state is MovieDetailsSuccess) {
                       final details = state.movie.movie!;
+                      final movie = SavedMovie(
+                        id: moviesId,
+                        title: details.title ?? '',
+                        posterUrl: details.mediumCoverImage ?? '',
+                        rating: details.rating ?? 0,
+                      );
+                      void watch() {
+                        context.read<HistoryCubit>().add(movie);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return MoviesWebView(movieDetails: details);
+                            },
+                          ),
+                        );
+                      }
+
                       return Column(
                         children: [
                           Stack(
@@ -71,7 +90,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 right: 0,
                                 child: Center(
                                   child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: watch,
                                     icon: Image.asset(
                                       AppAssets.playVideo,
                                       width: 97,
@@ -89,31 +108,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       },
                                       onBookmarkTap: () {
                                         context.read<WatchListCubit>().toggle(
-                                          SavedMovie(
-                                            id: moviesId,
-                                            title: details.title ?? '',
-                                            posterUrl:
-                                                details.mediumCoverImage ?? '',
-                                            rating: details.rating ?? 0,
-                                          ),
+                                          movie,
                                         );
                                       },
                                     ),
                               ),
                               MovieDetailsContent(
                                 details: details,
-                                onPressedWatch: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return MoviesWebView(
-                                          movieDetails: details,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
+                                onPressedWatch: watch,
                               ),
                             ],
                           ),

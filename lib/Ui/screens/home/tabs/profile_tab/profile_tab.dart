@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/Ui/widgets/auth/auth_failure.dart';
 import 'package:movies_app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:movies_app/cubit/watch_list/saved_movie.dart';
+import 'package:movies_app/cubit/watch_list/history_cubit.dart';
 import 'package:movies_app/cubit/watch_list/watch_list_cubit.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -53,6 +54,7 @@ class ProfileTab extends StatelessWidget {
     final photoUrl = user?.photoUrl;
 
     final watchList = context.watch<WatchListCubit>().state;
+    final history = context.watch<HistoryCubit>().state;
 
     return DefaultTabController(
       length: 2,
@@ -100,7 +102,10 @@ class ProfileTab extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: _Stat(count: 0, label: l10n.profileHistory),
+                        child: _Stat(
+                          count: history.count,
+                          label: l10n.profileHistory,
+                        ),
                       ),
                     ],
                   ),
@@ -174,7 +179,7 @@ class ProfileTab extends StatelessWidget {
           child: TabBarView(
             children: [
               _MovieGrid(movies: watchList.movies),
-              _MovieGrid(movies: []),
+              _MovieGrid(movies: history.movies),
             ],
           ),
         ),
