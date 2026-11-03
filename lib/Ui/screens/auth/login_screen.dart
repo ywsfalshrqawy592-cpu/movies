@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/app_assets.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_routes.dart';
+import '../../../utils/size_utils.dart';
 import '../../widgets/auth_footer_text.dart';
 import '../../widgets/custom_elevated_botton.dart';
 import '../../widgets/language_switch.dart';
@@ -13,71 +14,82 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = context.height;
+    final width = context.width;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.037),
           child: Column(
             children: [
-              const SizedBox(height: 40),
-              Image.asset(AppAssets.splash, width: 121, height: 118),
-              const SizedBox(height: 69),
-              const AuthField(
+              SizedBox(height: height * 0.043),
+              Image.asset(
+                AppAssets.splash,
+                width: width * 0.28,
+                height: height * 0.127,
+              ),
+              SizedBox(height: height * 0.074),
+              AuthField(
                 hint: 'Email',
                 icon: Icons.email,
                 keyboardType: TextInputType.emailAddress,
               ),
-              const SizedBox(height: 22),
-              const AuthField(
+              SizedBox(height: height * 0.024),
+              AuthField(
                 hint: 'Password',
                 icon: Icons.lock,
                 isPassword: true,
               ),
-              const SizedBox(height: 17),
-              const Align(
+              SizedBox(height: height * 0.018),
+              Align(
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
                   'Forget Password ?',
                   style: TextStyle(color: AppColors.primaryColor, fontSize: 14),
                 ),
               ),
-              const SizedBox(height: 33),
+              SizedBox(height: height * 0.035),
               SizedBox(
                 width: double.infinity,
-                height: 56,
+                height: height * 0.06,
                 child: CustomElevatedBotton(
                   onPressed: () => Navigator.pushReplacementNamed(
                     context,
                     AppRoutes.homeRouteName,
                   ),
-                  child: const Text(
+                  child: Text(
                     'Login',
                     style: TextStyle(color: AppColors.fieldColor, fontSize: 20),
                   ),
                 ),
               ),
-              const SizedBox(height: 23),
+              SizedBox(height: height * 0.025),
               AuthFooterText(
                 question: 'Don’t Have Account ?',
                 action: 'Create One',
                 onTap: () =>
                     Navigator.pushNamed(context, AppRoutes.registerRouteName),
               ),
-              const SizedBox(height: 27),
-              const OrDivider(),
-              const SizedBox(height: 28),
+              SizedBox(height: height * 0.029),
+              OrDivider(),
+              SizedBox(height: height * 0.03),
               SizedBox(
                 width: double.infinity,
-                height: 56,
+                height: height * 0.06,
                 child: CustomElevatedBotton(
                   onPressed: () {},
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(AppAssets.google, width: 26, height: 26),
-                      const SizedBox(width: 10),
-                      const Text(
+                      Image.asset(
+                        AppAssets.google,
+                        width: width * 0.06,
+                        height: width * 0.06,
+                      ),
+                      SizedBox(width: width * 0.023),
+                      Text(
                         'Login With Google',
                         style: TextStyle(
                           color: AppColors.fieldColor,
@@ -88,9 +100,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 33),
-              const LanguageSwitch(),
-              const SizedBox(height: 32),
+              SizedBox(height: height * 0.035),
+              LanguageSwitch(),
+              SizedBox(height: height * 0.034),
             ],
           ),
         ),

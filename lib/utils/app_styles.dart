@@ -5,6 +5,53 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppStyles {
+  static TextStyle regular14White = GoogleFonts.elMessiri(
+    fontSize: 14,
+    color: AppColors.whiteColor,
+  );
+  static TextStyle regular16White = GoogleFonts.elMessiri(
+    fontSize: 16,
+    color: AppColors.whiteColor,
+  );
+  static TextStyle regular14Primary = GoogleFonts.elMessiri(
+    fontSize: 14,
+    color: AppColors.primaryColor,
+  );
+  static TextStyle regular15Primary = GoogleFonts.elMessiri(
+    fontSize: 15,
+    color: AppColors.primaryColor,
+  );
+  static TextStyle regular16Primary = GoogleFonts.elMessiri(
+    fontSize: 16,
+    color: AppColors.primaryColor,
+  );
+  static TextStyle regular16Black = GoogleFonts.elMessiri(
+    fontSize: 16,
+    color: AppColors.blackColor,
+  );
+  static TextStyle regular16Field = GoogleFonts.elMessiri(
+    fontSize: 16,
+    color: AppColors.fieldColor,
+  );
+  static TextStyle regular20Field = GoogleFonts.elMessiri(
+    fontSize: 20,
+    color: AppColors.fieldColor,
+  );
+  static TextStyle regular20Background = GoogleFonts.elMessiri(
+    fontSize: 20,
+    color: AppColors.backgroundColor,
+  );
+  static TextStyle bold14Primary = GoogleFonts.elMessiri(
+    fontSize: 14,
+    fontWeight: FontWeight.w900,
+    color: AppColors.primaryColor,
+  );
+  static TextStyle regularDynamicWhite = GoogleFonts.elMessiri(
+    color: AppColors.whiteColor,
+  );
+  static TextStyle regularDynamicPrimary = GoogleFonts.elMessiri(
+    color: AppColors.primaryColor,
+  );
   static TextStyle bold16White = GoogleFonts.elMessiri(
     fontSize: 16,
     fontWeight: FontWeight.bold,

@@ -1,17 +1,46 @@
-# movies_app
+# Movies App
 
-A new Flutter project.
+A Flutter movie discovery app with Firebase email authentication, Arabic and
+English localization, onboarding, and a movie home screen.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Flutter SDK matching the Dart constraint in `pubspec.yaml`.
+- A configured Firebase project for Android, iOS, or macOS.
+- Firebase Authentication with Email/Password enabled.
 
-A few resources to get you started if this is your first Flutter project:
+## Run locally
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```sh
+flutter pub get
+flutter run
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Firebase configuration is stored in the native platform files and
+`lib/firebase_options.dart`. Web, Windows, and Linux are not configured in the
+Dart Firebase options yet.
+
+## Localization
+
+English and Arabic strings live in `lib/l10n/app_en.arb` and
+`lib/l10n/app_ar.arb`. After editing either file, regenerate the localization
+classes with:
+
+```sh
+flutter gen-l10n
+```
+
+The language control is available in onboarding, authentication screens, the
+home screen, and profile editing.
+
+## Source layout
+
+- `lib/Ui/auth`: Firebase auth service, user model, validation, and error mapping.
+- `lib/cubit`: authentication and screen state management.
+- `lib/Ui/screens`: onboarding, authentication, profile, and movie screens.
+- `lib/Ui/widgets`: shared UI components.
+- `lib/utils`: routes, styles, colors, assets, and preferences.
+- `test/auth_validators_test.dart`: basic email and password validation tests.
+
+See [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) for the auth flow and
+Firebase setup notes.
