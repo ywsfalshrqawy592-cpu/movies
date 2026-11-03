@@ -703,6 +703,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See More'**
   String get homeSeeMore;
+
+  /// No description provided for @profileWishList.
+  ///
+  /// In en, this message translates to:
+  /// **'Wish List'**
+  String get profileWishList;
+
+  /// No description provided for @profileHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get profileHistory;
+
+  /// No description provided for @profileWatchList.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch List'**
+  String get profileWatchList;
+
+  /// No description provided for @profileExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get profileExit;
 }
 
 class _AppLocalizationsDelegate
