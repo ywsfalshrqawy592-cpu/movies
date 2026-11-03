@@ -85,12 +85,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Stream<String?> _userIds(AuthCubit authCubit) => authCubit.stream
-    .map((state) => state.user?.uid)
-    .transform(_startWith(authCubit.state.user?.uid));
-
-StreamTransformer<String?, String?> _startWith(String? first) =>
-    StreamTransformer.fromBind((stream) async* {
-      yield first;
-      yield* stream;
-    });
+Stream<String?> _userIds(AuthCubit authCubit) {
+  late StreamController<String?> controller;
+  StreamSubscription<AuthState>? subscription;
+  controller = StreamController<String?>(
+    onListen: () {
+      controller.add(authCubit.state.user?.uid);
+      subscription = authCubit.stream.listen(
+        (state) => controller.add(state.user?.uid),
+      );
+    },
+    onCancel: () => subscription?.cancel(),
+  );
+  return controller.stream;
+}
