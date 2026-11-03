@@ -32,8 +32,6 @@ Future<void> main() async {
           create: (context) {
             final authCubit = context.read<AuthCubit>();
             return WatchListCubit(
-              // TODO: switch to FirestoreWatchListService() once Firestore is
-              // enabled.
               LocalWatchListService(),
               userIds: authCubit.stream
                   .map((state) => state.user?.uid)
@@ -79,7 +77,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// Emits [first] before the values of the source stream.
 StreamTransformer<String?, String?> _startWith(String? first) =>
     StreamTransformer.fromBind((stream) async* {
       yield first;

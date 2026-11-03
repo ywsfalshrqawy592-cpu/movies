@@ -1,7 +1,8 @@
 import 'saved_movie.dart';
 
 class WatchListState {
-  const WatchListState({this.movies = const [], this.errorMessage});
+  WatchListState({List<SavedMovie>? movies, this.errorMessage})
+    : movies = movies ?? [];
 
   final List<SavedMovie> movies;
   final String? errorMessage;

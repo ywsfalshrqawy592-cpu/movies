@@ -12,8 +12,8 @@ import 'package:movies_app/utils/app_routes.dart';
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
 
-  static const _headerColor = Color(0xFF212121);
-  static const _popcornImage = 'assets/images/popcorn.png';
+  static final _headerColor = Color(0xFF212121);
+  static final _popcornImage = 'assets/images/popcorn.png';
 
   Future<void> _confirmLogout(BuildContext context) async {
     final l10n = AppLocalizations.of(context)!;
@@ -61,7 +61,7 @@ class ProfileTab extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               color: _headerColor,
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+              padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
               child: Column(
                 children: [
                   Row(
@@ -75,17 +75,17 @@ class ProfileTab extends StatelessWidget {
                                 ? null
                                 : AssetImage(photoUrl),
                             child: photoUrl == null
-                                ? const Icon(
+                                ? Icon(
                                     Icons.person_outline,
                                     size: 58,
                                     color: AppColors.primaryColor,
                                   )
                                 : null,
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           Text(
                             name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: AppColors.whiteColor,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -104,7 +104,7 @@ class ProfileTab extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
@@ -118,20 +118,20 @@ class ProfileTab extends StatelessWidget {
                           ).pushNamed(AppRoutes.updateProfileRouteName),
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                       Expanded(
                         flex: 2,
                         child: _ProfileButton(
                           label: l10n.profileExit,
                           icon: Icons.logout,
-                          color: const Color(0xFFE82626),
+                          color: Color(0xFFE82626),
                           textColor: AppColors.whiteColor,
                           onPressed: () => _confirmLogout(context),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                 ],
               ),
             ),
@@ -146,10 +146,10 @@ class ProfileTab extends StatelessWidget {
                 dividerColor: Colors.transparent,
                 labelColor: AppColors.whiteColor,
                 unselectedLabelColor: AppColors.whiteColor,
-                labelStyle: const TextStyle(fontSize: 20),
+                labelStyle: TextStyle(fontSize: 20),
                 tabs: [
                   Tab(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.format_list_bulleted,
                       color: AppColors.primaryColor,
                       size: 32,
@@ -157,7 +157,7 @@ class ProfileTab extends StatelessWidget {
                     text: l10n.profileWatchList,
                   ),
                   Tab(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.folder,
                       color: AppColors.primaryColor,
                       size: 32,
@@ -174,7 +174,7 @@ class ProfileTab extends StatelessWidget {
           child: TabBarView(
             children: [
               _MovieGrid(movies: watchList.movies),
-              const _MovieGrid(movies: []),
+              _MovieGrid(movies: []),
             ],
           ),
         ),
@@ -184,7 +184,7 @@ class ProfileTab extends StatelessWidget {
 }
 
 class _Stat extends StatelessWidget {
-  const _Stat({required this.count, required this.label});
+  _Stat({required this.count, required this.label});
 
   final int count;
   final String label;
@@ -195,16 +195,16 @@ class _Stat extends StatelessWidget {
       children: [
         Text(
           '$count',
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.whiteColor,
             fontSize: 36,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.whiteColor,
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -216,7 +216,7 @@ class _Stat extends StatelessWidget {
 }
 
 class _ProfileButton extends StatelessWidget {
-  const _ProfileButton({
+  _ProfileButton({
     required this.label,
     required this.color,
     required this.textColor,
@@ -247,11 +247,8 @@ class _ProfileButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(label, style: const TextStyle(fontSize: 20)),
-            if (icon != null) ...[
-              const SizedBox(width: 8),
-              Icon(icon, size: 24),
-            ],
+            Text(label, style: TextStyle(fontSize: 20)),
+            if (icon != null) ...[SizedBox(width: 8), Icon(icon, size: 24)],
           ],
         ),
       ),
@@ -260,7 +257,7 @@ class _ProfileButton extends StatelessWidget {
 }
 
 class _EmptyList extends StatelessWidget {
-  const _EmptyList();
+  _EmptyList();
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +265,7 @@ class _EmptyList extends StatelessWidget {
       child: Image.asset(
         ProfileTab._popcornImage,
         width: 124,
-        errorBuilder: (_, _, _) => const Icon(
+        errorBuilder: (_, _, _) => Icon(
           Icons.local_movies_outlined,
           size: 96,
           color: AppColors.primaryColor,
@@ -299,17 +296,17 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class _MovieGrid extends StatelessWidget {
-  const _MovieGrid({required this.movies});
+  _MovieGrid({required this.movies});
 
   final List<SavedMovie> movies;
 
   @override
   Widget build(BuildContext context) {
-    if (movies.isEmpty) return const _EmptyList();
+    if (movies.isEmpty) return _EmptyList();
 
     return GridView.builder(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 100),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         mainAxisSpacing: 16,
         crossAxisSpacing: 12,
@@ -333,16 +330,13 @@ class _MovieGrid extends StatelessWidget {
                   movie.posterUrl,
                   fit: BoxFit.cover,
                   errorBuilder: (_, _, _) =>
-                      const ColoredBox(color: AppColors.fieldColor),
+                      ColoredBox(color: AppColors.fieldColor),
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    margin: const EdgeInsets.all(8),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
+                    margin: EdgeInsets.all(8),
+                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: AppColors.blackColor71,
                       borderRadius: BorderRadius.circular(10),
@@ -352,12 +346,12 @@ class _MovieGrid extends StatelessWidget {
                       children: [
                         Text(
                           '${movie.rating}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.whiteColor,
                             fontSize: 14,
                           ),
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Image.asset(AppAssets.star, width: 14, height: 14),
                       ],
                     ),

@@ -6,10 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'saved_movie.dart';
 import 'watch_list_service.dart';
 
-/// Keeps the saved movies on this device, one list per signed-in user.
-///
-/// Temporary stand-in until Firestore is enabled for the project: the list
-/// does not follow the account to other devices.
 class LocalWatchListService implements WatchListService {
   final _changes = StreamController<String>.broadcast();
 
@@ -46,7 +42,6 @@ class LocalWatchListService implements WatchListService {
   Future<void> add(String uid, SavedMovie movie) async {
     final movies = await _read(uid);
     movies.removeWhere((saved) => saved.id == movie.id);
-    // Newest first, like the Firestore version.
     await _write(uid, [movie, ...movies]);
   }
 

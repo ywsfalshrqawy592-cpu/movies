@@ -6,13 +6,9 @@ import 'saved_movie.dart';
 import 'watch_list_service.dart';
 import 'watch_list_state.dart';
 
-/// Holds the saved movies of the signed-in user.
-///
-/// It follows the session: when the user changes it switches to their list,
-/// and when they sign out it clears the list.
 class WatchListCubit extends Cubit<WatchListState> {
   WatchListCubit(this._service, {required Stream<String?> userIds})
-    : super(const WatchListState()) {
+    : super(WatchListState()) {
     _userSubscription = userIds.distinct().listen(_onUserChanged);
   }
 
@@ -25,7 +21,7 @@ class WatchListCubit extends Cubit<WatchListState> {
     _uid = uid;
     _listSubscription?.cancel();
     _listSubscription = null;
-    emit(const WatchListState());
+    emit(WatchListState());
     if (uid == null) return;
     _listSubscription = _service
         .watchList(uid)
@@ -37,7 +33,6 @@ class WatchListCubit extends Cubit<WatchListState> {
         );
   }
 
-  /// Saves the movie, or removes it if it is already saved.
   Future<void> toggle(SavedMovie movie) async {
     final uid = _uid;
     if (uid == null) return;
