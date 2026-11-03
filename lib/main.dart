@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,20 +12,35 @@ import 'package:movies_app/Ui/widgets/auth/auth_gate.dart';
 import 'package:movies_app/Ui/screens/auth/register/register_screen.dart';
 import 'package:movies_app/cubit/language/language_cubit.dart';
 import 'package:movies_app/cubit/onboarding/onboarding_cubit.dart';
+import 'package:movies_app/cubit/auth_cubit/auth_cubit.dart';
+import 'package:movies_app/cubit/watch_list/watch_list_cubit.dart';
+import 'package:movies_app/cubit/watch_list/watch_list_service.dart';
 import 'package:movies_app/firebase_options.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_prefs.dart';
 import 'package:movies_app/utils/app_routes.dart';
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await AppPrefs.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     BlocProvider(
       create: (_) => LanguageCubit(),
-      child: const AuthScope(child: MyApp()),
+      child: AuthScope(
+        child: BlocProvider(
+          create: (context) {
+            final authCubit = context.read<AuthCubit>();
+            return WatchListCubit(
+              WatchListService(),
+              userIds: authCubit.stream
+                  .map((state) => state.user?.uid)
+                  .transform(_startWith(authCubit.state.user?.uid)),
+            );
+          },
+          child: const MyApp(),
+        ),
+      ),
     ),
   );
 }
@@ -39,8 +56,7 @@ class MyApp extends StatelessWidget {
         locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        initialRoute:
-        AppPrefs.onboardingSeen
+        initialRoute: AppPrefs.onboardingSeen
             ? AppRoutes.homeRouteName
             : AppRoutes.onBoardingRouteName,
         routes: {
@@ -54,10 +70,16 @@ class MyApp extends StatelessWidget {
               const ResetPasswordScreen(),
           AppRoutes.updateProfileRouteName: (context) =>
               const UpdateProfileScreen(),
-          AppRoutes.detailsRouteName: (context) =>  DetailsScreen(),
-
+          AppRoutes.detailsRouteName: (context) => DetailsScreen(),
         },
       ),
     );
   }
 }
+
+/// Emits [first] before the values of the source stream.
+StreamTransformer<String?, String?> _startWith(String? first) =>
+    StreamTransformer.fromBind((stream) async* {
+      yield first;
+      yield* stream;
+    });

@@ -339,4 +339,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeSeeMore => 'See More';
+
+  @override
+  String get profileWishList => 'Wish List';
+
+  @override
+  String get profileHistory => 'History';
+
+  @override
+  String get profileWatchList => 'Watch List';
+
+  @override
+  String get profileExit => 'Exit';
 }

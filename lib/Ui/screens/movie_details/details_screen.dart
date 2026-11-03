@@ -6,6 +6,9 @@ import 'package:movies_app/Ui/screens/movie_details/widget/movie_genres.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_poster.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/movie_summary.dart';
 import 'package:movies_app/Ui/screens/movie_details/widget/similar_movies.dart';
+import 'package:movies_app/cubit/watch_list/saved_movie.dart';
+import 'package:movies_app/cubit/watch_list/watch_list_cubit.dart';
+import 'package:movies_app/cubit/watch_list/watch_list_state.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import '../../../utils/app_routes.dart';
@@ -27,7 +30,6 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = DetailsViewModel();
   SuggestionsViewModel suggestionsViewModel = SuggestionsViewModel();
-  bool isSelected = false;
 
   @override
   void dispose() {
@@ -47,7 +49,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              BlocProvider(create: (context) => detailsViewModel..getMovieDetailsBySourceId(sourceId: moviesId),
+              BlocProvider(
+                create: (context) =>
+                    detailsViewModel
+                      ..getMovieDetailsBySourceId(sourceId: moviesId),
                 child: BlocBuilder<DetailsViewModel, DetailsStats>(
                   builder: (context, state) {
                     if (state is MovieDetailsSuccess) {
@@ -75,27 +80,39 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                                 ),
                               ),
-                              MovieDetailsActions(
-                                isSelected: isSelected,
-                                onBackTap: () {
-                                  Navigator.pop(context);
-                                },
-                                onBookmarkTap: () {
-                                  setState(() {
-                                    isSelected = !isSelected;
-                                  });
-                                },
+                              BlocBuilder<WatchListCubit, WatchListState>(
+                                builder: (context, watchList) =>
+                                    MovieDetailsActions(
+                                      isSelected: watchList.isSaved(moviesId),
+                                      onBackTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      onBookmarkTap: () {
+                                        context.read<WatchListCubit>().toggle(
+                                          SavedMovie(
+                                            id: moviesId,
+                                            title: details.title ?? '',
+                                            posterUrl:
+                                                details.mediumCoverImage ?? '',
+                                            rating: details.rating ?? 0,
+                                          ),
+                                        );
+                                      },
+                                    ),
                               ),
                               MovieDetailsContent(
                                 details: details,
                                 onPressedWatch: () {
-
-                                  Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) {
-                                      return MoviesWebView(movieDetails:details,);
-
-                                  },));
-
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return MoviesWebView(
+                                          movieDetails: details,
+                                        );
+                                      },
+                                    ),
+                                  );
                                 },
                               ),
                             ],
@@ -120,7 +137,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               SizedBox(height: height * .016),
               BlocProvider(
                 create: (context) =>
-                    suggestionsViewModel..getMovieSuggestions(sourceId: moviesId),
+                    suggestionsViewModel
+                      ..getMovieSuggestions(sourceId: moviesId),
                 child: BlocBuilder<SuggestionsViewModel, SuggestionsStats>(
                   builder: (context, state) {
                     if (state is MovieSuggestionsSuccess) {
@@ -149,7 +167,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 return Column(
                                   children: [
                                     MovieSummary(
-                                      summary: currentMovie?.descriptionFull ??
+                                      summary:
+                                          currentMovie?.descriptionFull ??
                                           currentMovie?.descriptionIntro ??
                                           "",
                                     ),
@@ -165,7 +184,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                       );
                     }
-      
+
                     if (state is MovieSuggestionsError) {
                       return CustomErrorWidget(
                         error: state.errorMessage,
@@ -176,7 +195,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         },
                       );
                     }
-      
+
                     return CustomLoadingWidget();
                   },
                 ),

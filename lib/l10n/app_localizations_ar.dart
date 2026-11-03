@@ -338,4 +338,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeSeeMore => 'عرض المزيد';
+
+  @override
+  String get profileWishList => 'قائمة الأمنيات';
+
+  @override
+  String get profileHistory => 'السجل';
+
+  @override
+  String get profileWatchList => 'قائمة المشاهدة';
+
+  @override
+  String get profileExit => 'خروج';
 }

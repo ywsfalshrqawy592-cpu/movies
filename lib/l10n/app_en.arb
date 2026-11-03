@@ -128,5 +128,9 @@
   "homeAvailableNow": "Available Now",
   "homeWatchNow": "Watch Now",
   "homeActionGenre": "Action",
-  "homeSeeMore": "See More"
+  "homeSeeMore": "See More",
+  "profileWishList": "Wish List",
+  "profileHistory": "History",
+  "profileWatchList": "Watch List",
+  "profileExit": "Exit"
 }

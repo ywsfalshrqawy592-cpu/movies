@@ -100,5 +100,9 @@
   "homeAvailableNow": "متاح الآن",
   "homeWatchNow": "شاهد الآن",
   "homeActionGenre": "أكشن",
-  "homeSeeMore": "عرض المزيد"
+  "homeSeeMore": "عرض المزيد",
+  "profileWishList": "قائمة الأمنيات",
+  "profileHistory": "السجل",
+  "profileWatchList": "قائمة المشاهدة",
+  "profileExit": "خروج"
 }
