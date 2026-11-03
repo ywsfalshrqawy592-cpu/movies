@@ -41,7 +41,9 @@ class DioManager {
         );
 
   //todo https://movies-api.accel.li/api/v2/movie_details.json?movie_id=1
-  static Future<DetailsResponse> getMovieDetailsBySourceId({required int sourceId,}) async {
+  static Future<DetailsResponse> getMovieDetailsBySourceId({
+    required int sourceId,
+  }) async {
     try {
       var detailsResponse = await dio.get(
         ApiConstants.movieDetails,
@@ -54,7 +56,9 @@ class DioManager {
   }
 
   //todo https://movies-api.accel.li/api/v2/movie_suggestions.json?movie_i=10
-  static Future<MovieSuggestions> getMovieSuggestions({required int sourceId}) async {
+  static Future<MovieSuggestions> getMovieSuggestions({
+    required int sourceId,
+  }) async {
     try {
       var detailsResponse = await dio.get(
         ApiEndPoints.movieSuggestions,
@@ -71,10 +75,28 @@ class DioManager {
     try {
       final response = await dio.get(
         ApiEndPoints.listMovies,
+        queryParameters: {'sort_by': 'year', 'order_by': 'desc', 'limit': 15},
+      );
+
+      final result = MoviesListModel.fromJson(response.data);
+
+      return result.data?.movies ?? [];
+    } on DioException catch (e) {
+      throw ApiErrorHandler.handleDioException(e);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<List<Movies>> getMoviesByGenre({required String genre}) async {
+    try {
+      final response = await dio.get(
+        ApiEndPoints.listMovies,
         queryParameters: {
-          'sort_by': 'year',
+          'genre': genre,
+          'sort_by': 'rating',
           'order_by': 'desc',
-          'limit': 15,
+          'limit': 20,
         },
       );
 
@@ -88,25 +110,14 @@ class DioManager {
     }
   }
 
+  // TODO: Test Movie Details API.
+  // TODO: Verify movie details fields (title, language, id, year, url, genres, slug).
 
+  // TODO: Test Movie Suggestions API.
+  // TODO: Verify suggestions count and movies list.
 
-
-
-
-
-
-
-
-
-
-// TODO: Test Movie Details API.
-// TODO: Verify movie details fields (title, language, id, year, url, genres, slug).
-
-// TODO: Test Movie Suggestions API.
-// TODO: Verify suggestions count and movies list.
-
-// TODO: Test Movies List API.
-// TODO: Verify movies count and movie fields (title, language, mpaRating, torrents, synopsis, cover image).
+  // TODO: Test Movies List API.
+  // TODO: Verify movies count and movie fields (title, language, mpaRating, torrents, synopsis, cover image).
   static Future<void> testMovies() async {
     try {
       final result = await DioManager.getMovies();
@@ -132,11 +143,10 @@ class DioManager {
       print('Movies List Test Failed: $e');
     }
   }
+
   static Future<void> testMovieDetails() async {
     try {
-      final result = await DioManager.getMovieDetailsBySourceId(
-        sourceId: 15,
-      );
+      final result = await DioManager.getMovieDetailsBySourceId(sourceId: 15);
 
       final movie = result.data!.movie!;
 
@@ -152,11 +162,10 @@ class DioManager {
       print('Movie Details Test Failed: $e');
     }
   }
+
   static Future<void> testMovieSuggestions() async {
     try {
-      final result = await DioManager.getMovieSuggestions(
-        sourceId: 10,
-      );
+      final result = await DioManager.getMovieSuggestions(sourceId: 10);
 
       final data = result.data!;
 
@@ -172,6 +181,4 @@ class DioManager {
       print('Movie Suggestions Test Failed: $e');
     }
   }
-
-
 }
