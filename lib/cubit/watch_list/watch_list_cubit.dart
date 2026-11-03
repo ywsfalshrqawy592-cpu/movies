@@ -57,6 +57,16 @@ class WatchListCubit extends Cubit<WatchListState> {
     }
   }
 
+  Future<void> remove(SavedMovie movie) async {
+    final uid = _uid;
+    if (uid == null) return;
+    try {
+      await _service.remove(uid, movie.id);
+    } catch (e) {
+      emit(WatchListState(movies: state.movies, errorMessage: e.toString()));
+    }
+  }
+
   @override
   Future<void> close() {
     _userSubscription.cancel();

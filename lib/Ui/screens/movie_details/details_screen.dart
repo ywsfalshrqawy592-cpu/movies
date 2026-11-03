@@ -54,7 +54,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 create: (context) =>
                     detailsViewModel
                       ..getMovieDetailsBySourceId(sourceId: moviesId),
-                child: BlocBuilder<DetailsViewModel, DetailsStats>(
+                child: BlocConsumer<DetailsViewModel, DetailsStats>(
+                  listener: (context, state) {
+                    if (state is MovieDetailsSuccess) {
+                      final details = state.movie.movie!;
+                      context.read<HistoryCubit>().add(
+                        SavedMovie(
+                          id: moviesId,
+                          title: details.title ?? '',
+                          posterUrl: details.mediumCoverImage ?? '',
+                          rating: details.rating ?? 0,
+                        ),
+                      );
+                    }
+                  },
                   builder: (context, state) {
                     if (state is MovieDetailsSuccess) {
                       final details = state.movie.movie!;
@@ -65,7 +78,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         rating: details.rating ?? 0,
                       );
                       void watch() {
-                        context.read<HistoryCubit>().add(movie);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
