@@ -1,7 +1,5 @@
-/// The few fields of a movie the Profile grid needs, saved per user in
-/// Firestore so the list can be drawn without calling the movie API again.
 class SavedMovie {
-  const SavedMovie({
+  SavedMovie({
     required this.id,
     required this.title,
     required this.posterUrl,
