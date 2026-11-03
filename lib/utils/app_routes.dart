@@ -18,4 +18,7 @@ class AppRoutes {
 
   /// Movie details screen.
   static const String movieDetailsRouteName = "movie_details_screen";
+
+  /// Search screen, including its initial empty state and result states.
+  static const String searchRouteName = "search_screen";
 }

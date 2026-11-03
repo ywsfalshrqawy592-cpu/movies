@@ -70,6 +70,12 @@ class HomeScreen extends StatelessWidget {
         title: Text(l10n.appTitle, style: AppStyles.bold20Primary),
         actions: [
           IconButton(
+            tooltip: MaterialLocalizations.of(context).searchFieldLabel,
+            icon: const Icon(Icons.search, color: AppColors.primaryColor),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(AppRoutes.searchRouteName),
+          ),
+          IconButton(
             tooltip: l10n.authEditProfile,
             icon: const Icon(
               Icons.person_outline,

@@ -35,4 +35,8 @@ class AppAssets {
       "assets/images/movie_details_cast_charlize.jpg";
   static const String movieDetailsRatingStar =
       "assets/images/movie_details_rating_star.png";
+
+  // Search result artwork.
+  static const String searchIronMan3 = "assets/images/search_iron_man_3.jpg";
+  static const String searchJoker = "assets/images/search_joker.jpg";
 }
