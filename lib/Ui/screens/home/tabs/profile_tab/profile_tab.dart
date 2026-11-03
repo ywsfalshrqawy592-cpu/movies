@@ -68,32 +68,38 @@ class ProfileTab extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 58,
-                            backgroundColor: AppColors.fieldColor,
-                            backgroundImage: photoUrl == null
-                                ? null
-                                : AssetImage(photoUrl),
-                            child: photoUrl == null
-                                ? Icon(
-                                    Icons.person_outline,
-                                    size: 58,
-                                    color: AppColors.primaryColor,
-                                  )
-                                : null,
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            name,
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: 130,
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 58,
+                              backgroundColor: AppColors.fieldColor,
+                              backgroundImage: photoUrl == null
+                                  ? null
+                                  : AssetImage(photoUrl),
+                              child: photoUrl == null
+                                  ? Icon(
+                                      Icons.person_outline,
+                                      size: 58,
+                                      color: AppColors.primaryColor,
+                                    )
+                                  : null,
                             ),
-                          ),
-                        ],
+                            SizedBox(height: 12),
+                            Text(
+                              name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: AppColors.whiteColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: _Stat(
@@ -207,12 +213,16 @@ class _Stat extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16),
-        Text(
-          label,
-          style: TextStyle(
-            color: AppColors.whiteColor,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            maxLines: 1,
+            style: TextStyle(
+              color: AppColors.whiteColor,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
