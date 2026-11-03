@@ -14,7 +14,7 @@ import 'package:movies_app/cubit/language/language_cubit.dart';
 import 'package:movies_app/cubit/onboarding/onboarding_cubit.dart';
 import 'package:movies_app/cubit/auth_cubit/auth_cubit.dart';
 import 'package:movies_app/cubit/watch_list/watch_list_cubit.dart';
-import 'package:movies_app/cubit/watch_list/watch_list_service.dart';
+import 'package:movies_app/cubit/watch_list/local_watch_list_service.dart';
 import 'package:movies_app/firebase_options.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_prefs.dart';
@@ -32,7 +32,9 @@ Future<void> main() async {
           create: (context) {
             final authCubit = context.read<AuthCubit>();
             return WatchListCubit(
-              WatchListService(),
+              // TODO: switch to FirestoreWatchListService() once Firestore is
+              // enabled.
+              LocalWatchListService(),
               userIds: authCubit.stream
                   .map((state) => state.user?.uid)
                   .transform(_startWith(authCubit.state.user?.uid)),
