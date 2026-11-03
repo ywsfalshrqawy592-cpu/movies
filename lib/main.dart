@@ -32,12 +32,14 @@ Future<void> main() async {
         child: MultiBlocProvider(
           providers: [
             BlocProvider<WatchListCubit>(
+              lazy: false,
               create: (context) => WatchListCubit(
                 LocalWatchListService(),
                 userIds: _userIds(context.read<AuthCubit>()),
               ),
             ),
             BlocProvider<HistoryCubit>(
+              lazy: false,
               create: (context) => HistoryCubit(
                 LocalWatchListService('history'),
                 userIds: _userIds(context.read<AuthCubit>()),
