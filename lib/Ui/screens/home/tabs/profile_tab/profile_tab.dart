@@ -9,6 +9,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
+import 'package:movies_app/utils/size_utils.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
@@ -52,6 +53,8 @@ class ProfileTab extends StatelessWidget {
     final user = context.watch<AuthCubit>().state.user;
     final name = user?.displayName?.trim() ?? '';
     final photoUrl = user?.photoUrl;
+    final width = context.width;
+    final height = context.height;
 
     final watchList = context.watch<WatchListCubit>().state;
     final history = context.watch<HistoryCubit>().state;
@@ -63,17 +66,22 @@ class ProfileTab extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               color: _headerColor,
-              padding: EdgeInsets.fromLTRB(16, 24, 16, 0),
+              padding: EdgeInsets.fromLTRB(
+                width * 0.037,
+                height * 0.026,
+                width * 0.037,
+                0,
+              ),
               child: Column(
                 children: [
                   Row(
                     children: [
                       SizedBox(
-                        width: 130,
+                        width: width * 0.302,
                         child: Column(
                           children: [
                             CircleAvatar(
-                              radius: 58,
+                              radius: width * 0.135,
                               backgroundColor: AppColors.fieldColor,
                               backgroundImage: photoUrl == null
                                   ? null
@@ -81,12 +89,12 @@ class ProfileTab extends StatelessWidget {
                               child: photoUrl == null
                                   ? Icon(
                                       Icons.person_outline,
-                                      size: 58,
+                                      size: width * 0.135,
                                       color: AppColors.primaryColor,
                                     )
                                   : null,
                             ),
-                            SizedBox(height: 12),
+                            SizedBox(height: height * 0.013),
                             Text(
                               name,
                               maxLines: 1,
@@ -115,7 +123,7 @@ class ProfileTab extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: height * 0.021),
                   Row(
                     children: [
                       Expanded(
@@ -129,7 +137,7 @@ class ProfileTab extends StatelessWidget {
                           ).pushNamed(AppRoutes.updateProfileRouteName),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      SizedBox(width: width * 0.023),
                       Expanded(
                         flex: 2,
                         child: _ProfileButton(
@@ -142,7 +150,7 @@ class ProfileTab extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: height * 0.017),
                 ],
               ),
             ),
@@ -163,7 +171,7 @@ class ProfileTab extends StatelessWidget {
                     icon: Icon(
                       Icons.format_list_bulleted,
                       color: AppColors.primaryColor,
-                      size: 32,
+                      size: width * 0.074,
                     ),
                     text: l10n.profileWatchList,
                   ),
@@ -171,7 +179,7 @@ class ProfileTab extends StatelessWidget {
                     icon: Icon(
                       Icons.folder,
                       color: AppColors.primaryColor,
-                      size: 32,
+                      size: width * 0.074,
                     ),
                     text: l10n.profileHistory,
                   ),
@@ -212,7 +220,7 @@ class _Stat extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: context.height * 0.017),
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
@@ -247,8 +255,9 @@ class _ProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = context.width;
     return SizedBox(
-      height: 56,
+      height: context.height * 0.06,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -256,14 +265,17 @@ class _ProfileButton extends StatelessWidget {
           foregroundColor: textColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(width * 0.037),
           ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(label, style: TextStyle(fontSize: 20)),
-            if (icon != null) ...[SizedBox(width: 8), Icon(icon, size: 24)],
+            if (icon != null) ...[
+              SizedBox(width: width * 0.019),
+              Icon(icon, size: width * 0.056),
+            ],
           ],
         ),
       ),
@@ -279,10 +291,10 @@ class _EmptyList extends StatelessWidget {
     return Center(
       child: Image.asset(
         ProfileTab._popcornImage,
-        width: 124,
+        width: context.width * 0.288,
         errorBuilder: (_, _, _) => Icon(
           Icons.local_movies_outlined,
-          size: 96,
+          size: context.width * 0.223,
           color: AppColors.primaryColor,
         ),
       ),
@@ -318,13 +330,20 @@ class _MovieGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (movies.isEmpty) return _EmptyList();
+    final width = context.width;
+    final height = context.height;
 
     return GridView.builder(
-      padding: EdgeInsets.fromLTRB(16, 16, 16, 100),
+      padding: EdgeInsets.fromLTRB(
+        width * 0.037,
+        height * 0.017,
+        width * 0.037,
+        height * 0.107,
+      ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 12,
+        mainAxisSpacing: height * 0.017,
+        crossAxisSpacing: width * 0.028,
         childAspectRatio: 0.65,
       ),
       itemCount: movies.length,
@@ -337,7 +356,7 @@ class _MovieGrid extends StatelessWidget {
             arguments: movie.id,
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(width * 0.037),
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -350,11 +369,14 @@ class _MovieGrid extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    margin: EdgeInsets.all(8),
-                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    margin: EdgeInsets.all(width * 0.019),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.014,
+                      vertical: height * 0.002,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.blackColor71,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(width * 0.023),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -366,8 +388,12 @@ class _MovieGrid extends StatelessWidget {
                             fontSize: 14,
                           ),
                         ),
-                        SizedBox(width: 4),
-                        Image.asset(AppAssets.star, width: 14, height: 14),
+                        SizedBox(width: width * 0.009),
+                        Image.asset(
+                          AppAssets.star,
+                          width: width * 0.033,
+                          height: width * 0.033,
+                        ),
                       ],
                     ),
                   ),
