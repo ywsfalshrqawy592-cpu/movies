@@ -17,4 +17,9 @@ class AppAssets {
   static const String posterAction1 = "assets/images/poster_action_1.png";
   static const String posterAction2 = "assets/images/poster_action_2.png";
   static const String star = "assets/images/star.png";
+  static const String bookMark = "assets/images/book_mark.png";
+  static const String hart = "assets/images/hart.png";
+  static const String playVideo = "assets/images/Play video.png";
+  static const String time = "assets/images/time.png";
+
 }
