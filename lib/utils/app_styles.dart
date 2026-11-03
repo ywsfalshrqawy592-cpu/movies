@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -12,6 +13,16 @@ class AppStyles {
   static TextStyle regular16White = GoogleFonts.elMessiri(
     fontSize: 16,
     color: AppColors.whiteColor,
+  );
+  static TextStyle regular20White = GoogleFonts.roboto(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+  );
+  static TextStyle regular16Yellow = GoogleFonts.roboto(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: Colors.yellow,
   );
   static TextStyle regular14Primary = GoogleFonts.elMessiri(
     fontSize: 14,
