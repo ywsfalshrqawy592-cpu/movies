@@ -7,9 +7,12 @@ import 'saved_movie.dart';
 import 'watch_list_service.dart';
 
 class LocalWatchListService implements WatchListService {
+  LocalWatchListService([this._listName = 'watchlist']);
+
+  final String _listName;
   final _changes = StreamController<String>.broadcast();
 
-  String _key(String uid) => 'watchlist_$uid';
+  String _key(String uid) => '${_listName}_$uid';
 
   Future<List<SavedMovie>> _read(String uid) async {
     final prefs = await SharedPreferences.getInstance();

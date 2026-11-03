@@ -13,6 +13,7 @@ import 'package:movies_app/Ui/screens/auth/register/register_screen.dart';
 import 'package:movies_app/cubit/language/language_cubit.dart';
 import 'package:movies_app/cubit/onboarding/onboarding_cubit.dart';
 import 'package:movies_app/cubit/auth_cubit/auth_cubit.dart';
+import 'package:movies_app/cubit/watch_list/history_cubit.dart';
 import 'package:movies_app/cubit/watch_list/watch_list_cubit.dart';
 import 'package:movies_app/cubit/watch_list/local_watch_list_service.dart';
 import 'package:movies_app/firebase_options.dart';
@@ -28,16 +29,21 @@ Future<void> main() async {
     BlocProvider(
       create: (_) => LanguageCubit(),
       child: AuthScope(
-        child: BlocProvider(
-          create: (context) {
-            final authCubit = context.read<AuthCubit>();
-            return WatchListCubit(
-              LocalWatchListService(),
-              userIds: authCubit.stream
-                  .map((state) => state.user?.uid)
-                  .transform(_startWith(authCubit.state.user?.uid)),
-            );
-          },
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<WatchListCubit>(
+              create: (context) => WatchListCubit(
+                LocalWatchListService(),
+                userIds: _userIds(context.read<AuthCubit>()),
+              ),
+            ),
+            BlocProvider<HistoryCubit>(
+              create: (context) => HistoryCubit(
+                LocalWatchListService('history'),
+                userIds: _userIds(context.read<AuthCubit>()),
+              ),
+            ),
+          ],
           child: const MyApp(),
         ),
       ),
@@ -76,6 +82,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+Stream<String?> _userIds(AuthCubit authCubit) => authCubit.stream
+    .map((state) => state.user?.uid)
+    .transform(_startWith(authCubit.state.user?.uid));
 
 StreamTransformer<String?, String?> _startWith(String? first) =>
     StreamTransformer.fromBind((stream) async* {

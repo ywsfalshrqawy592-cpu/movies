@@ -11,14 +11,15 @@ abstract class WatchListService {
 }
 
 class FirestoreWatchListService implements WatchListService {
-  FirestoreWatchListService([this._firestore]);
+  FirestoreWatchListService([this._listName = 'watchlist', this._firestore]);
 
+  final String _listName;
   final FirebaseFirestore? _firestore;
 
   FirebaseFirestore get _db => _firestore ?? FirebaseFirestore.instance;
 
   CollectionReference<Map<String, dynamic>> _watchList(String uid) =>
-      _db.collection('users').doc(uid).collection('watchlist');
+      _db.collection('users').doc(uid).collection(_listName);
 
   @override
   Stream<List<SavedMovie>> watchList(String uid) => _watchList(uid)
