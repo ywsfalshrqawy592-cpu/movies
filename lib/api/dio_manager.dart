@@ -88,6 +88,7 @@ class DioManager {
     }
   }
 
+  // todo: بتجيب أفلام نوع معين (Action مثلا) مرتبة من الأعلى تقييم
   static Future<List<Movies>> getMoviesByGenre({required String genre}) async {
     try {
       final response = await dio.get(
