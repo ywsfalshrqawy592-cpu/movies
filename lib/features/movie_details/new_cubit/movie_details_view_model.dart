@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/network/dio_manager.dart';
-import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_stats.dart';
+
+import 'movie_details_stats.dart';
 
 part 'suggestions_view_model.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/features/movie_details/presentation/cubit/movie_web_view_model.dart';
+import 'package:movies_app/features/movie_details/new_cubit/movie_web_view_model.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/movie_web_view_app_bar.dart';
 import 'package:movies_app/features/movies/data/models/movie_details.dart';
 import 'package:movies_app/utils/app_colors.dart';

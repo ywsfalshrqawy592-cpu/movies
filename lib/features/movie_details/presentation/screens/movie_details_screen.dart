@@ -17,9 +17,10 @@ import 'package:movies_app/utils/size_utils.dart';
 import 'package:movies_app/shared/widgets/custom_error_widget.dart';
 import 'package:movies_app/shared/widgets/custom_loading_widget.dart';
 import 'package:movies_app/features/home/presentation/widgets/movie_gradient.dart';
-import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_stats.dart';
-import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_view_model.dart';
 import 'package:movies_app/features/movie_details/presentation/screens/movie_web_view_screen.dart';
+
+import '../../new_cubit/movie_details_stats.dart';
+import '../../new_cubit/movie_details_view_model.dart';
 
 part 'details_screen_state.dart';
 
